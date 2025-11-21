@@ -57,7 +57,7 @@ export default function About() {
             <div className="absolute top-0 right-0 w-4/5 h-3/4 rounded-2xl overflow-hidden border-4 border-[var(--color-orange)] shadow-2xl transform rotate-3 z-10 group hover:rotate-0 transition-all duration-500 ease-in-out">
               <div className="absolute inset-0 bg-[var(--color-orange)] mix-blend-overlay opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
               <Image
-                src="/aboutinage1.jpg"
+                src="/images/aboutimage1.jpg"
                 alt="Projet de menuiserie aluminium"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
@@ -72,7 +72,7 @@ export default function About() {
             <div className="absolute top-0 left-0 w-1/3 h-1/3 rounded-xl overflow-hidden border-4 border-[var(--color-orange)] shadow-lg transform -rotate-3 hover:rotate-0 transition-all duration-500 ease-in-out group">
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
               <Image
-                src="/aboutimage2.jpg"
+                src="/images/aboutimage2.jpg"
                 alt="Détail de menuiserie"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
@@ -82,7 +82,7 @@ export default function About() {
             {/* Small Bottom Left Image */}
             <div className="absolute bottom-0 left-10 w-2/5 h-2/5 rounded-xl overflow-hidden border-4 border-[var(--color-orange)] shadow-lg transform rotate-6 hover:rotate-0 transition-all duration-500 ease-in-out group">
               <Image
-                src="/aboutimage3.jpg"
+                src="/images/aboutimage3.jpg"
                 alt="Projet d'installation"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"

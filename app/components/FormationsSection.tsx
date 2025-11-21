@@ -16,14 +16,14 @@ const formationsData = [
     title: "Sécurité des Baies Vitrées",
     description: "Apprenez à installer des systèmes de sécurité avancés pour les grandes surfaces vitrées et les portes coulissantes. Formation pratique avec des cas concrets.",
     duration: "12 Mois",
-    imageUrl: "/images/imageformation2.png"
+    imageUrl: "/images/formationsvitrerie-mesure.jpg"
   },
   {
     id: 3,
     title: "Rénovation de Façades Aluminium",
     description: "Maîtrisez les techniques de rénovation et d'isolation thermique des façades en aluminium. Découvrez les meilleures pratiques du secteur.",
     duration: "12 Mois",
-    imageUrl: "/images/imageformation3.png"
+    imageUrl: "/images/renovation-douche.png"
   }
 ];
 

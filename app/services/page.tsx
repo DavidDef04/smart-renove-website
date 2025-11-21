@@ -14,7 +14,7 @@ const services = [
     description: 'Fabrication et pose de fenêtres, portes et façades en aluminium sur mesure pour une intégration parfaite à votre habitat. Nos solutions allient esthétique moderne et performance durable.',
     icon: Wrench,
     bgGradient: "from-[var(--color-blue)] to-blue-600",
-    image: '/menuiserie-aluminium.jpg',
+    image: '/images/menuiserie-aluminium.jpg',
     slug: 'menuiserie',
     features: [
       'Fenêtres sur mesure',
@@ -29,7 +29,7 @@ const services = [
     description: 'Des ouvertures élégantes et fonctionnelles qui créent une transition fluide entre vos espaces intérieurs et extérieurs. Parfait pour agrandir visuellement votre espace de vie.',
     icon: Layout,
     bgGradient: "from-emerald-500 to-teal-600",
-    image: '/baies-coulissantes.jpg',
+    image: '/images/baies-coulissantes.jpg',
     slug: 'baies-coulissantes',
     features: [
       'Systèmes coulissants silencieux',
@@ -44,7 +44,7 @@ const services = [
     description: 'Des créations uniques adaptées à vos besoins spécifiques et à l\'architecture de votre bien. Notre équipe d\'experts vous accompagne de la conception à la réalisation.',
     icon: Ruler,
     bgGradient: "from-amber-500 to-yellow-500",
-    image: '/sur-mesure.jpg',
+    image: '/images/sur-mesure.jpg',
     slug: 'sur-mesure',
     features: [
       'Étude personnalisée',
@@ -59,7 +59,7 @@ const services = [
     description: 'Solutions professionnelles pour les vitrines, façades et aménagements intérieurs de vos locaux. Des réalisations qui valorisent votre image de marque.',
     icon: Building2,
     bgGradient: "from-indigo-500 to-purple-600",
-    image: '/projets-commerciaux.jpg',
+    image: '/images/projets-commerciaux.jpg',
     slug: 'projets-commerciaux',
     features: [
       'Vitrines professionnelles',
@@ -74,7 +74,7 @@ const services = [
     description: 'Transformation complète de vos espaces avec une approche sur mesure et des matériaux haut de gamme pour un résultat à la hauteur de vos attentes.',
     icon: Home,
     bgGradient: "from-rose-500 to-pink-600",
-    image: '/renovation.jpg',
+    image: '/images/renovation.jpg',
     slug: 'renovation',
     features: [
       'Rénovation intérieure/extérieure',
@@ -89,7 +89,7 @@ const services = [
     description: 'Systèmes de sécurité avancés pour vos ouvertures, alliant esthétique et protection optimale. Des solutions adaptées à vos besoins spécifiques.',
     icon: ShieldCheck,
     bgGradient: "from-red-500 to-rose-600",
-    image: '/securite.jpg',
+    image: '/images/securite.jpg',
     slug: 'securite',
     features: [
       'Portes blindées',
@@ -104,7 +104,7 @@ const services = [
     description: 'Conseils et solutions d\'isolation performantes pour améliorer le confort et réduire votre consommation d\'énergie. Des économies durables pour votre foyer.',
     icon: Thermometer,
     bgGradient: "from-blue-400 to-cyan-500",
-    image: '/isolation.jpg',
+    image: '/images/isolation.jpg',
     slug: 'isolation-thermique',
     features: [
       'Double/triple vitrage',
@@ -119,7 +119,7 @@ const services = [
     description: 'Un service clé en main pour la fourniture et la pose de menuiseries aluminium vitrées. Des produits de qualité, installés par nos équipes qualifiées.',
     icon: Hammer,
     bgGradient: "from-green-500 to-emerald-600",
-    image: '/fourniture-pose.jpg',
+    image: '/images/fourniture-pose.jpg',
     slug: 'fourniture-pose',
     features: [
       'Produits haut de gamme',
@@ -134,7 +134,7 @@ const services = [
     description: 'Services complets de serrurerie pour tous types d\'ouvertures et de systèmes de sécurité. Des solutions sur mesure pour une protection optimale.',
     icon: Key,
     bgGradient: "from-amber-700 to-amber-600",
-    image: '/serrurerie.jpg',
+    image: '/images/serrurerie.jpg',
     slug: 'serrurerie',
     features: [
       'Dépannage serrurerie',
@@ -149,7 +149,7 @@ const services = [
     description: 'Création de cloisons et séparations vitrées pour optimiser vos espaces de vie. Des solutions élégantes et fonctionnelles pour une meilleure circulation de la lumière.',
     icon: Settings,
     bgGradient: "from-purple-500 to-indigo-600",
-    image: '/agencements.jpg',
+    image: '/images/agencements.jpg',
     slug: 'agencements',
     features: [
       'Cloisons vitrées',
@@ -164,7 +164,7 @@ const services = [
     description: 'Service après-vente et maintenance préventive pour garantir la longévité de vos installations. Une équipe réactive à votre écoute pour tous vos besoins.',
     icon: HardHat,
     bgGradient: "from-gray-600 to-gray-800",
-    image: '/maintenance.jpg',
+    image: '/images/maintenance.jpg',
     slug: 'maintenance',
     features: [
       'Entretien régulier',

@@ -40,7 +40,7 @@ export default function PourquoiNous() {
             {/* Main Image */}
             <div className="absolute inset-0 w-4/5 h-4/5 mx-auto rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-10">
               <Image
-                src="/pourquoiNous1.jpg"
+                src="/images/pourquoiNous1.png"
                 alt="Projet de menuiserie aluminium"
                 fill
                 className="object-cover"
@@ -54,7 +54,7 @@ export default function PourquoiNous() {
             {/* Small Image 1 */}
             <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full border-4 border-white shadow-lg overflow-hidden z-20">
               <Image
-                src="/pourquoiNous3.jpg"
+                src="/images/pourquoiNous3.png"
                 alt="Détail de menuiserie"
                 fill
                 className="object-cover"
@@ -64,7 +64,7 @@ export default function PourquoiNous() {
             {/* Small Image 2 */}
             <div className="absolute top-10 right-10 w-28 h-28 rounded-2xl border-4 border-white shadow-lg overflow-hidden z-20 transform rotate-6">
               <Image
-                src="/pourquoiNous32.jpg"
+                src="/images/pourquoiNous2.png"
                 alt="Projet d'installation"
                 fill
                 className="object-cover"

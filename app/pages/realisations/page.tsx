@@ -309,7 +309,7 @@ export default function RealisationsPage() {
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-10px" }}
         className="relative py-12 overflow-hidden"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -341,7 +341,7 @@ export default function RealisationsPage() {
               <span className="font-semibold text-blue-600">Parcourez nos réalisations</span> et laissez-vous inspirer par notre <span className="font-medium text-amber-600">savoir-faire</span> en menuiserie aluminium.
             </motion.p>
           </motion.div>
-<motion.div 
+          <motion.div 
             variants={item}
             className="transform transition-all duration-500"
           >

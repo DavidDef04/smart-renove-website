@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 const partners = [
-  { id: 1, logo: '/partenaire1.jpg', name: 'Partenaire 1' },
-  { id: 2, logo: '/partenaire2.jpg', name: 'Partenaire 2' },
-  { id: 3, logo: '/partenaire3.jpg', name: 'Partenaire 3' },
-  { id: 4, logo: '/partenaire4.jpg', name: 'Partenaire 4' },
-  { id: 5, logo: '/partenaire5.jpg', name: 'Partenaire 5' },
+  { id: 1, logo: '/images/partenaire1.jpg', name: 'Partenaire 1' },
+  { id: 2, logo: '/images/partenaire2.jpg', name: 'Partenaire 2' },
+  { id: 3, logo: '/images/partenaire3.jpg', name: 'Partenaire 3' },
+  { id: 4, logo: '/images/partenaire4.jpg', name: 'Partenaire 4' },
+  { id: 5, logo: '/images/partenaire5.jpg', name: 'Partenaire 5' },
 ];
 
 const PartnerCard = ({ partner, index }: { partner: any; index: number }) => {

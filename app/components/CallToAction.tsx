@@ -58,7 +58,7 @@ export default function CallToAction() {
             className="relative h-80 md:h-96 lg:h-[500px]"
           >
             <Image
-              src="/besoinserrurier.jpg"
+              src="/images/besoinserrurier.jpg"
               alt="Menuiserie Aluminium de qualité"
               fill
               className="object-cover rounded-2xl shadow-2xl border-4 border-white/20"
