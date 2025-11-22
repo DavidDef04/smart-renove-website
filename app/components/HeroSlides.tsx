@@ -36,7 +36,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    videoUrl: '/videos/slidevideo3.mp4', 
+    videoUrl: '/videos/videonettoyage.mp4', 
     title: 'Installation & Rénovation',
     description: 'Maîtrisez les techniques les plus avancées',
     buttonText: 'Nos services',
@@ -57,9 +57,54 @@ export default function HeroSlides() {
       if (video && parseInt(i) !== index) {
         video.pause();
         video.currentTime = 0;
+      } else if (video && parseInt(i) === index) {
+        // Forcer la lecture de la vidéo active
+        video.play().catch(error => {
+          console.error('Erreur de lecture vidéo:', error);
+        });
       }
     });
   };
+
+  // Gestion de la lecture des vidéos lors du changement de slide
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(error => {
+              console.error('Erreur de lecture vidéo:', error);
+            });
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      },
+      {
+        threshold: 0.5 // Déclenche quand 50% de la vidéo est visible
+      }
+    );
+
+    // Observer chaque vidéo
+    Object.values(videoRefs.current).forEach(video => {
+      if (video) {
+        observer.observe(video);
+      }
+    });
+
+    // Nettoyage
+    return () => {
+      Object.values(videoRefs.current).forEach(video => {
+        if (video) {
+          observer.unobserve(video);
+        }
+      });
+    };
+  }, [isMounted]);
 
   if (!isMounted) {
     return null;

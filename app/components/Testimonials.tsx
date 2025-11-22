@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import Image from 'next/image';
@@ -12,51 +12,42 @@ import 'swiper/css/pagination';
 const testimonials = [
   {
     id: 1,
-    name: "Jean Dupont",
-    role: "Propriétaire de maison",
-    content: "Service exceptionnel ! L'équipe a su concrétiser mes attentes avec professionnalisme. Les menuiseries en aluminium sont d'une qualité remarquable.",
+    name: "Awa Mballa",
+    role: "Propriétaire à Douala",
+    content: "Service professionnel et de qualité. L'équipe a su me conseiller sur le meilleur choix de menuiserie pour ma résidence à Bonapriso. Je recommande vivement !",
     rating: 5,
     image: "/images/testimonial1.jpg"
   },
   {
     id: 2,
-    name: "Marie Laurent",
-    role: "Gérante de commerce",
-    content: "Travail soigné et respect des délais. La rénovation de notre vitrine a complètement transformé notre commerce. Je recommande vivement !",
+    name: "Jean-Baptiste Nkoulou",
+    role: "Gérant d'hôtel à Yaoundé",
+    content: "Excellente prestation pour la rénovation de nos chambres. Travail soigné et respect des délais, ce qui est rare à trouver. Je reviendrai certainement.",
     rating: 5,
     image: "/images/testimonial2.jpg"
   },
   {
     id: 3,
-    name: "Thomas Martin",
-    role: "Architecte d'intérieur",
-    content: "Collaboration très professionnelle. Leur expertise en menuiserie aluminium est impressionnante. Des partenaires de confiance pour mes projets.",
-    rating: 4,
+    name: "Fatimatou Ousmanou",
+    role: "Commerçante à Garoua",
+    content: "Installation de mes vitrines réalisée avec professionnalisme. Les finitions sont impeccables et le service après-vente est réactif. Très satisfaite !",
+    rating: 5,
     image: "/images/testimonial3.jpg"
   },
   {
     id: 4,
-    name: "Sophie Leroy",
-    role: "Particulier",
-    content: "Installation de portes-fenêtres en aluminium. Le résultat est à la hauteur de mes attentes, avec une finition parfaite et un excellent rapport qualité-prix.",
+    name: "Arsène Mbarga",
+    role: "Entrepreneur à Bafoussam",
+    content: "Une équipe sérieuse et compétente. Les travaux de rénovation de mon bureau ont été réalisés dans les délais impartis. Je recommande les yeux fermés.",
     rating: 5,
     image: "/images/testimonial4.jpg"
-  },
-  {
-    id: 5,
-    name: "Marc Dubois",
-    role: "Gérant d'hôtel",
-    content: "Prestation de haute qualité pour la rénovation de nos façades vitrées. Réactivité, professionnalisme et respect du cahier des charges.",
-    rating: 5,
-    image: "/images/testimonial5.jpg"
   }
 ];
 
 const Testimonials = () => {
-  const [_, setInit] = useState(false);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperRef>(null);
 
   const prevSlide = () => {
     if (swiperRef.current && !isBeginning) {
@@ -99,14 +90,14 @@ const Testimonials = () => {
               disabled={isBeginning}
               className={`w-12 h-12 rounded-full flex items-center justify-center ${isBeginning ? 'bg-gray-200 text-gray-400' : 'bg-white text-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white'} shadow-md transition-all duration-300`}
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-6 h-6" aria-hidden="true" />
             </button>
             <button 
               onClick={nextSlide}
               disabled={isEnd}
               className={`w-12 h-12 rounded-full flex items-center justify-center ${isEnd ? 'bg-gray-200 text-gray-400' : 'bg-white text-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white'} shadow-md transition-all duration-300`}
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -128,7 +119,7 @@ const Testimonials = () => {
               disableOnInteraction: false,
             }}
             loop={false}
-            onInit={() => setInit(true)}
+            onInit={() => {}}
             onSlideChange={(swiper) => {
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
@@ -152,15 +143,18 @@ const Testimonials = () => {
                     </div>
                     
                     {/* Content */}
-                    <p className="text-gray-600 italic mb-6">"{testimonial.content}"</p>
+                    <div className="text-gray-700 italic">&ldquo;{testimonial.content}&rdquo;</div>
                     
                     {/* Author */}
                     <div className="flex items-center">
                       <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 mr-4">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
+                        <Image
+                          src={testimonial.image}
+                          alt={`Photo de ${testimonial.name}`}
+                          width={64}
+                          height={64}
+                          className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
+                          priority
                         />
                       </div>
                       <div>

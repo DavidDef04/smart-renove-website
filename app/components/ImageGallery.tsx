@@ -14,16 +14,18 @@ type ProjectType = {
   color: string;
 };
 
-type ImageType = {
+type MediaType = {
   src: string;
   alt: string;
   title?: string;
   description?: string;
+  type?: 'image' | 'video';
+  thumbnail?: string;
 };
 
 type ImageGalleryProps = {
   projects: ProjectType[];
-  additionalImages?: ImageType[];
+  additionalImages?: MediaType[];
   showThumbnails?: boolean;
   autoPlay?: boolean;
   showFullscreen?: boolean;
@@ -41,7 +43,8 @@ export default function ImageGallery({
     src: project.image,
     alt: project.title,
     title: project.title,
-    description: project.description
+    description: project.description,
+    type: 'image' as const
   }));
 
   // Combiner les images des projets avec les images supplémentaires
@@ -101,17 +104,32 @@ export default function ImageGallery({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.02 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="h-full w-full"
+            className="h-full w-full flex items-center justify-center"
           >
-            <Image
-              src={images[currentIndex]?.src || ''}
-              alt={images[currentIndex]?.alt || 'Image de la galerie'}
-              fill
-              className="object-contain transition-opacity duration-500 p-4"
-              style={{ opacity: isLoading ? 0 : 1 }}
-              onLoadingComplete={() => setIsLoading(false)}
-              priority
-            />
+            {images[currentIndex]?.type === 'video' ? (
+              <video 
+                src={images[currentIndex]?.src} 
+                className="max-h-full max-w-full object-contain"
+                autoPlay
+                loop
+                muted
+                playsInline
+                onCanPlayThrough={() => setIsLoading(false)}
+                style={{ opacity: isLoading ? 0 : 1 }}
+              >
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            ) : (
+              <Image
+                src={images[currentIndex]?.src || ''}
+                alt={images[currentIndex]?.alt || 'Image de la galerie'}
+                fill
+                className="object-contain transition-opacity duration-500 p-4"
+                style={{ opacity: isLoading ? 0 : 1 }}
+                onLoadingComplete={() => setIsLoading(false)}
+                priority
+              />
+            )}
           </motion.div>
         </AnimatePresence>
         {isLoading && (
@@ -213,13 +231,27 @@ export default function ImageGallery({
               }}
               aria-label={`Aller à l'image ${index + 1}`}
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 25vw, (max-width: 1200px) 16.66vw, 12.5vw"
-              />
+              {image.type === 'video' ? (
+                <video 
+                  src={image.src} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={image.thumbnail}
+                >
+                  Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+              ) : (
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 25vw, (max-width: 1200px) 16.66vw, 12.5vw"
+                />
+              )}
             </motion.button>
           ))}
         </motion.div>

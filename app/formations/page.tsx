@@ -80,7 +80,22 @@ export default function FormationsPage() {
   const firstRow = currentFormations.slice(0, 3);
   const secondRow = currentFormations.slice(3, 6);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  // Fonction pour changer de page
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Faire défiler vers le haut de la section des formations
+    const formationsSection = document.getElementById('formations');
+    if (formationsSection) {
+      const headerOffset = 100; // Ajustez cette valeur selon la hauteur de votre en-tête fixe s'il y en a un
+      const elementPosition = formationsSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -146,38 +161,100 @@ export default function FormationsPage() {
             </div>
           </div>
 
-          {/* Pagination */}
+          {/* Pagination améliorée */}
           {totalPages > 1 && (
-            <div className="flex justify-center mt-8 mb-16">
-              <nav className="flex items-center space-x-2">
+            <div className="flex justify-center mt-8 mb-16" aria-label="Pagination">
+              <nav className="flex items-center space-x-1 sm:space-x-2">
                 <button
                   onClick={() => paginate(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-3 sm:px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Page précédente"
                 >
-                  Précédent
+                  <span className="sr-only">Précédent</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
                 </button>
-                
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                  <button
-                    key={number}
-                    onClick={() => paginate(number)}
-                    className={`w-10 h-10 flex items-center justify-center rounded-full ${
-                      currentPage === number 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-white text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    {number}
-                  </button>
-                ))}
-                
+
+                {(() => {
+                  const pages = [];
+                  const maxVisiblePages = 5;
+                  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+                  if (endPage - startPage + 1 < maxVisiblePages) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                  }
+
+                  if (startPage > 1) {
+                    pages.push(
+                      <button
+                        key={1}
+                        onClick={() => paginate(1)}
+                        className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                          1 === currentPage 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        1
+                      </button>
+                    );
+                    if (startPage > 2) {
+                      pages.push(<span key="start-ellipsis" className="px-2">...</span>);
+                    }
+                  }
+
+                  for (let i = startPage; i <= endPage; i++) {
+                    pages.push(
+                      <button
+                        key={i}
+                        onClick={() => paginate(i)}
+                        className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                          i === currentPage 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }`}
+                        aria-current={i === currentPage ? 'page' : undefined}
+                      >
+                        {i}
+                      </button>
+                    );
+                  }
+
+                  if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                      pages.push(<span key="end-ellipsis" className="px-2">...</span>);
+                    }
+                    pages.push(
+                      <button
+                        key={totalPages}
+                        onClick={() => paginate(totalPages)}
+                        className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                          totalPages === currentPage 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        {totalPages}
+                      </button>
+                    );
+                  }
+
+                  return pages;
+                })()}
+
                 <button
                   onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-3 sm:px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Page suivante"
                 >
-                  Suivant
+                  <span className="sr-only">Suivant</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
               </nav>
             </div>

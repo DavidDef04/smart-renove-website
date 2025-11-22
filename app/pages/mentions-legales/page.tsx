@@ -127,6 +127,7 @@ export default function MentionsLegales() {
                     <div>
                       <p className="font-medium text-gray-900">Téléphone</p>
                       <p className="text-gray-600">+237 694 522 255</p>
+                      <p className="text-gray-600">+237 675 993 229</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
@@ -166,7 +167,7 @@ export default function MentionsLegales() {
             {
               icon: <User className="w-6 h-6" />,
               title: "Directeur Général",
-              description: "M. [Nom du DG]",
+              description: "M. PEUKONG JORDAN",
               color: "from-purple-500 to-purple-600"
             },
             {
