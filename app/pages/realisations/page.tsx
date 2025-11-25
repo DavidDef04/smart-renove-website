@@ -31,7 +31,7 @@ const item = {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: {
+  show: {
     opacity: 1,
     y: 0,
     transition: {
@@ -437,12 +437,12 @@ export default function RealisationsPage() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-10px" }}
-        className="relative py-12 overflow-hidden"
+        className="relative py-4 overflow-hidden"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             variants={fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-2"
           >
             <motion.span 
               className="inline-block px-4 py-1.5 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full mb-4"
