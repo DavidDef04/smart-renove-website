@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 import Footer from '@/app/components/Footer';
+import useContactForm from '@/app/components/ContactForm';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -16,8 +17,11 @@ export default function ContactPage() {
     isUrgent: false
   });
   const [fileName, setFileName] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  
+  // Utilisation du hook personnalisé pour Turnstile
+  const { isSubmitting, isTurnstileValid, submitForm, resetTurnstile, TurnstileWidget } = useContactForm();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -38,32 +42,37 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setError('');
     
-    // Simulation d'envoi de formulaire
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Validation du formulaire
+    if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
+      setError('Veuillez remplir tous les champs obligatoires');
+      return;
+    }
     
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    // Réinitialiser le formulaire après 3 secondes
-    setTimeout(() => {
-      // Validation du formulaire
-      if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.message) {
-        alert('Veuillez remplir tous les champs obligatoires');
-        return;
-      };
-
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        file: null,
-        isUrgent: false
-      });
-      setIsSubmitted(false);
-    }, 5000);
+    try {
+      await submitForm(formData);
+      setIsSubmitted(true);
+      
+      // Réinitialiser le formulaire après 5 secondes
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          file: null,
+          isUrgent: false
+        });
+        setFileName('');
+        setIsSubmitted(false);
+        resetTurnstile();
+      }, 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      resetTurnstile();
+    }
   };
 
   // Animations
@@ -268,9 +277,9 @@ export default function ContactPage() {
             <div className="flex flex-col lg:flex-row gap-12">
               {/* Contact Form */}
               <div className="lg:w-2/3">
-                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100">
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-blue-700">
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">Écrivez-nous</h2>
-                  <p className="text-gray-600 mb-8">Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
+                  <p className="text-gray-600 mb-8">Remplissez correctement le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
                   
                   {isSubmitted ? (
                     <motion.div 
@@ -285,11 +294,28 @@ export default function ContactPage() {
                       <p className="text-gray-600">Nous avons bien reçu votre message et vous répondrons dans les plus brefs délais.</p>
                     </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-8">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <form onSubmit={handleSubmit} className="space-y-10">
+                      <motion.div 
+                        variants={item}
+                        className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-100 shadow-sm"
+                      >
+                        <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
+                          <svg className="w-6 h-6 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                          </svg>
+                          Contactez-nous
+                        </h3>
+                        <p className="text-gray-600 text-sm">
+                          Notre équipe vous répondra dans les plus brefs délais. 
+                          <span className="text-red-500 font-medium ml-1">* Champs obligatoires</span>
+                        </p>
+                      </motion.div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/*--------Nom---------- */}
                         <motion.div 
                           variants={item}
-                          className="relative z-0 group"
+                          className="relative z-0 group rounded-lg "
                         >
                           <input
                             type="text"
@@ -298,7 +324,7 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer transition-all duration-300 hover:border-blue-300"
+                            className="block w-full pt-6 pb-2 px-4 bg-white/70 rounded-xl border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 peer transition-all duration-200 hover:border-blue-300 shadow-sm hover:shadow-md focus:shadow-md"
                             placeholder=" "
                           />
                           <label 
@@ -307,9 +333,10 @@ export default function ContactPage() {
                           >
                             Nom complet *
                           </label>
-                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
+                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
                         </motion.div>
-                        
+
+                        {/*--------Email---------- */}
                         <motion.div 
                           variants={item}
                           className="relative z-0 group"
@@ -321,7 +348,7 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer transition-all duration-300 hover:border-blue-300"
+                            className="block w-full pt-6 pb-2 px-4 bg-white/70 rounded-xl border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 peer transition-all duration-200 hover:border-blue-300 shadow-sm hover:shadow-md focus:shadow-md"
                             placeholder=" "
                           />
                           <label 
@@ -330,9 +357,10 @@ export default function ContactPage() {
                           >
                             Adresse email *
                           </label>
-                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
+                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
                         </motion.div>
                         
+                        {/*--------Téléphone---------- */}
                         <motion.div 
                           variants={item}
                           className="relative z-0 group"
@@ -343,30 +371,57 @@ export default function ContactPage() {
                             name="phone"
                             value={formData.phone}
                             onChange={(e) => {
-                              // Formatage automatique du numéro de téléphone
-                              const value = e.target.value
-                                .replace(/\D/g, '') // Garde uniquement les chiffres
-                                .replace(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/, '+33 $2 $3 $4 $5') // Format français
-                                .substr(0, 17); // Limite à la longueur maximale
+                              // Nettoyage des caractères non numériques
+                              let value = e.target.value.replace(/\D/g, '');
+                              
+                              // Limite à 12 chiffres (237 + 9)
+                              value = value.substring(0, 12);
+                              
+                              // Formatage avec espacements
+                              value = value.replace(/(\d{1,3})?(\d{0,3})?(\d{0,3})?(\d{0,3})?/, (match, p1, p2, p3, p4) => {
+                                let result = [];
+                                if (p1) result.push(p1);
+                                if (p2) result.push(p2);
+                                if (p3) result.push(p3);
+                                if (p4) result.push(p4);
+                                return result.join(' ').trim();
+                              });
                               
                               setFormData(prev => ({
                                 ...prev,
                                 phone: value
                               }));
                             }}
-                            className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer transition-all duration-300 hover:border-blue-300"
-                            placeholder=" "
+                            onBlur={(e) => {
+                              // Validation du numéro au moment de quitter le champ
+                              const phoneNumber = e.target.value.replace(/\s+/g, '');
+                              // Vérifie que le numéro commence par 237 suivi de 9 chiffres commençant par 2, 3, 6, 7, 8 ou 9
+                              // Accepte les espaces optionnels entre les groupes de chiffres
+                              const isValid = /^237\s*[236789]\s*\d{2}\s*\d{3}\s*\d{3}$/.test(e.target.value) || 
+                                            /^237[236789]\d{8}$/.test(phoneNumber);
+                              
+                              if (!isValid) {
+                                e.target.setCustomValidity('Format attendu : 237 6XX XXX XXX (ex: 237 679 413 963)');
+                              } else {
+                                e.target.setCustomValidity('');
+                              }
+                            }}
+                            className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer transition-all duration-300 hover:border-blue-300 placeholder-transparent"
+                            placeholder="237 6XX XXX XXX"
+                            pattern="^237\s*[236789]\s*\d{2}\s*\d{3}\s*\d{3}$"
+                            title="Entrez un numéro camerounais valide commençant par 237 suivi de 9 chiffres (ex: 237 655 123 456)"
                             required
                           />
                           <label 
                             htmlFor="phone" 
-                            className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-5 left-4 z-10 origin-[0] peer-focus:left-4 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                            className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-5 left-4 z-10 origin-left peer-focus:left-4 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                           >
                             Téléphone *
                           </label>
-                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
+                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
                         </motion.div>
                         
+                        {/*--------Sujet---------- */}
                         <motion.div 
                           variants={item}
                           className="relative z-0 group"
@@ -377,9 +432,9 @@ export default function ContactPage() {
                             value={formData.subject}
                             onChange={handleChange}
                             required
-                            className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer transition-all duration-300 hover:border-blue-300"
+                            className="block w-full pt-6 pb-2 px-4 bg-white/70 rounded-xl border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 peer transition-all duration-200 hover:border-blue-300 shadow-sm hover:shadow-md focus:shadow-md"
                           >
-                            <option value="" disabled hidden></option>
+                            <option value="" disabled hidden className="text-gray-300 align-center justify-center">Veuillez choisir un service * </option>
                             <option value="Devis">Demande de devis</option>
                             <option value="Information">Demande d'information</option>
                             <option value="Rendez-vous">Prise de rendez-vous</option>
@@ -390,9 +445,9 @@ export default function ContactPage() {
                             htmlFor="subject" 
                             className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-5 left-4 z-10 origin-[0] peer-focus:left-4 peer-focus:text-blue-500 ${formData.subject ? 'scale-75 -translate-y-6' : 'scale-100 translate-y-0'} peer-focus:scale-75 peer-focus:-translate-y-6`}
                           >
-                            Sujet de votre message *
+                            
                           </label>
-                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
+                          <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
                           <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -401,6 +456,7 @@ export default function ContactPage() {
                         </motion.div>
                       </div>
                       
+                      {/*--------Message---------- */}
                       <motion.div 
                         variants={item}
                         className="relative z-0 group mt-8"
@@ -412,25 +468,24 @@ export default function ContactPage() {
                           value={formData.message}
                           onChange={handleChange}
                           required
-                          className="block w-full pt-6 pb-2 px-4 bg-white/50 rounded-lg border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 peer min-h-[120px] resize-y transition-all duration-300 hover:border-blue-300"
+                          className="block w-full pt-6 pb-2 px-4 bg-white/70 rounded-xl border-2 border-gray-200 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 peer min-h-[140px] resize-y transition-all duration-200 hover:border-blue-300 shadow-sm hover:shadow-md focus:shadow-md"
                           placeholder=" "
                         ></textarea>
                         <label 
                           htmlFor="message" 
-                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-5 left-4 z-10 origin-[0] peer-focus:left-4 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-5 left-4 z-10 origin-left peer-focus:left-4 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                         >
                           Votre message *
                         </label>
-                        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full group-focus-within:w-full"></div>
-                        <div className="flex justify-between mt-2">
+                        <div className="mt-2">
                           <span className={`text-xs ${formData.message.length > 10 ? 'text-green-500' : 'text-gray-400'}`}>
                             {formData.message.length}/1000 caractères
                           </span>
-                          <span className="text-xs text-gray-500">* Champs obligatoires</span>
                         </div>
                       </motion.div>
 
-                      <motion.div variants={item} className="mt-8">
+                      {/*--------Fichier---------- */}
+                      <motion.div variants={item} className="mt-6 transition-all duration-200 hover:shadow-sm rounded-xl">
                         <label className="flex flex-col group cursor-pointer">
                           <div className="flex items-center px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg transition-all duration-300 group-hover:border-blue-400 group-hover:bg-blue-50/30 group-hover:shadow-inner">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -470,9 +525,10 @@ export default function ContactPage() {
                         </p>
                       </motion.div>
                       
+                      {/*--------Urgence---------- */}
                       <motion.div 
                         variants={item}
-                        className="mt-6"
+                        className="mt-6 p-6 bg-blue-50/70 rounded-xl border border-blue-100 shadow-sm"
                       >
                         <label className="flex items-center group cursor-pointer">
                           <div className="relative">
@@ -502,14 +558,38 @@ export default function ContactPage() {
                         </p>
                       </motion.div>
                       
+                      {/* Widget Turnstile CAPTCHA */}
                       <motion.div 
                         variants={item}
-                        className="pt-6"
+                        className="flex justify-center"
+                      >
+                        <TurnstileWidget />
+                      </motion.div>
+
+                      {/* Affichage des erreurs */}
+                      {error && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="p-4 bg-red-50 border border-red-200 rounded-xl"
+                        >
+                          <p className="text-red-600 text-sm flex items-center">
+                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                            </svg>
+                            {error}
+                          </p>
+                        </motion.div>
+                      )}
+                      
+                      <motion.div 
+                        variants={item}
+                        className="pt-4"
                       >
                         <button
                           type="submit"
-                          disabled={isSubmitting}
-                          className={`group relative w-full flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white font-medium rounded-full overflow-hidden transition-all duration-700 bg-size-200 hover:bg-right ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-blue-200'}`}
+                          disabled={isSubmitting || !isTurnstileValid}
+                          className={`group relative w-full flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-blue-200 hover:translate-y-[-2px]'}`}
                           style={{
                             backgroundSize: '200% 100%',
                             animation: isSubmitting ? 'pulse 2s infinite' : 'none'

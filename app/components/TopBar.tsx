@@ -1,13 +1,35 @@
 'use client';
 
-import { useState } from 'react';
-import { FaFacebook, FaYoutube, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+import { useState, useRef, useEffect } from 'react';
+import { FaFacebook, FaYoutube, FaWhatsapp, FaEnvelope, FaChevronDown, FaGlobe } from 'react-icons/fa';
 
 export default function TopBar() {
+  const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState('Fr');
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'Fr' ? 'En' : 'Fr');
+  // Gestion du clic en dehors du menu déroulant
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const changeLanguage = (lang: string) => {
+    setLanguage(lang);
+    setIsOpen(false);
+    // Ici, vous pourriez ajouter la logique pour changer la langue de l'application
   };
 
   return (
@@ -18,28 +40,48 @@ export default function TopBar() {
           <div className="container mx-auto px-4">
             <div className="flex justify-end items-center h-10 space-x-6">
               {/* Language Selector */}
-              <div className="flex items-center">
+              <div className="relative z-[9999]" ref={dropdownRef}>
                 <button 
-                  onClick={toggleLanguage}
-                  className="flex items-center space-x-1 hover:bg-white/20 px-2 py-1 rounded transition-colors"
-                  aria-label="Changer de langue"
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-1 hover:bg-white/20 px-3 py-1.5 rounded transition-colors"
+                  aria-expanded={isOpen}
+                  aria-haspopup="listbox"
+                  aria-label={`Langue actuelle: ${language === 'Fr' ? 'Français' : 'English'}`}
                 >
-                  <span className="uppercase text-xs font-medium">{language}</span>
-                  <svg 
-                    className="w-3 h-3" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M19 9l-7 7-7-7" 
-                    />
-                  </svg>
+                  <FaGlobe className="text-xs" />
+                  <span className="uppercase text-xs font-medium mx-1">{language}</span>
+                  <FaChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`} />
                 </button>
+                
+                {isOpen && (
+                  <div 
+                    className="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg z-[9999] -left-2 sm:left-auto"
+                    role="listbox"
+                  >
+                    <div className="py-1">
+                      <button
+                        onClick={() => changeLanguage('Fr')}
+                        className={`w-full text-left px-4 py-2 text-sm flex items-center ${language === 'Fr' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}
+                        role="option"
+                        aria-selected={language === 'Fr'}
+                      >
+                        <span className="mr-2">🇫🇷</span>
+                        <span>Français</span>
+                        {language === 'Fr' && <span className="ml-auto text-blue-500">✓</span>}
+                      </button>
+                      <button
+                        onClick={() => changeLanguage('En')}
+                        className={`w-full text-left px-4 py-2 text-sm flex items-center ${language === 'En' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}
+                        role="option"
+                        aria-selected={language === 'En'}
+                      >
+                        <span className="mr-2">🇬🇧</span>
+                        <span>English</span>
+                        {language === 'En' && <span className="ml-auto text-blue-500">✓</span>}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
               
               {/* Divider */}
