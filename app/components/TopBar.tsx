@@ -38,18 +38,18 @@ export default function TopBar() {
         {/* Partie bleue */}
         <div className="bg-[var(--color-blue)] flex-1">
           <div className="container mx-auto px-4">
-            <div className="flex justify-end items-center h-10 space-x-6">
+            <div className="flex justify-end items-center h-8 sm:h-10 space-x-2 sm:space-x-6">
               {/* Language Selector */}
               <div className="relative z-[9999]" ref={dropdownRef}>
                 <button 
                   onClick={toggleDropdown}
-                  className="flex items-center space-x-1 hover:bg-white/20 px-3 py-1.5 rounded transition-colors"
+                  className="flex items-center space-x-1 hover:bg-white/20 px-2 sm:px-3 py-1.5 rounded transition-colors"
                   aria-expanded={isOpen}
                   aria-haspopup="listbox"
                   aria-label={`Langue actuelle: ${language === 'Fr' ? 'Français' : 'English'}`}
                 >
-                  <FaGlobe className="text-xs" />
-                  <span className="uppercase text-xs font-medium mx-1">{language}</span>
+                  <FaGlobe className="text-xs sm:text-sm" />
+                  <span className="uppercase text-xs font-medium mx-1 hidden sm:inline">{language}</span>
                   <FaChevronDown className={`w-2.5 h-2.5 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`} />
                 </button>
                 
@@ -66,7 +66,7 @@ export default function TopBar() {
                         aria-selected={language === 'Fr'}
                       >
                         <span className="mr-2">🇫🇷</span>
-                        <span>Français</span>
+                        <span className="text-sm">Français</span>
                         {language === 'Fr' && <span className="ml-auto text-blue-500">✓</span>}
                       </button>
                       <button
@@ -76,7 +76,7 @@ export default function TopBar() {
                         aria-selected={language === 'En'}
                       >
                         <span className="mr-2">🇬🇧</span>
-                        <span>English</span>
+                        <span className="text-sm">English</span>
                         {language === 'En' && <span className="ml-auto text-blue-500">✓</span>}
                       </button>
                     </div>
@@ -84,56 +84,56 @@ export default function TopBar() {
                 )}
               </div>
               
-              {/* Divider */}
-              <div className="h-5 w-px bg-white/30"></div>
+              {/* Divider - caché sur mobile */}
+              <div className="h-5 w-px bg-white/30 hidden sm:block"></div>
               
               {/* Social Icons */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 sm:space-x-4">
                 <a 
                   href="https://www.facebook.com/people/Smart-renov-service/100083125284788" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-gray-200 transition-colors"
+                  className="hover:text-gray-200 transition-colors p-1 sm:p-0"
                   aria-label="Page Facebook Smart Rénov"
                   title="Visitez notre page Facebook"
                 >
-                  <FaFacebook size={16} />
+                  <FaFacebook size={14} className="sm:w-4 sm:h-4" />
                 </a>
                 <a 
                   href="https://www.youtube.com/@smartrenov" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-gray-200 transition-colors"
+                  className="hover:text-gray-200 transition-colors p-1 sm:p-0"
                   aria-label="Chaîne YouTube Smart Rénov"
                   title="Visitez notre chaîne YouTube"
                 >
-                  <FaYoutube size={16} />
+                  <FaYoutube size={14} className="sm:w-4 sm:h-4" />
                 </a>
                 <a 
                   href="https://wa.me/237694522355" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-gray-200 transition-colors"
+                  className="hover:text-gray-200 transition-colors p-1 sm:p-0"
                   aria-label="Contactez-nous sur WhatsApp"
                   title="Contactez-nous sur WhatsApp"
                 >
-                  <FaWhatsapp size={16} />
+                  <FaWhatsapp size={14} className="sm:w-4 sm:h-4" />
                 </a>
                 <a 
                   href="mailto:info@srs.cm" 
-                  className="hover:text-gray-200 transition-colors"
+                  className="hover:text-gray-200 transition-colors p-1 sm:p-0"
                   aria-label="Envoyez-nous un email"
                   title="Envoyez-nous un email"
                 >
-                  <FaEnvelope size={16} />
+                  <FaEnvelope size={14} className="sm:w-4 sm:h-4" />
                 </a>
               </div>
             </div>
           </div>
         </div>
         
-        {/* Partie orange */}
-        <div className="bg-[var(--color-orange)] w-32 flex items-center justify-center">
+        {/* Partie orange - responsive */}
+        <div className="bg-[var(--color-orange)] w-20 sm:w-32 flex items-center justify-center">
           {/* Vous pouvez ajouter du contenu ici si nécessaire */}
         </div>
       </div>
