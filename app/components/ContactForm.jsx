@@ -5,6 +5,7 @@ import Script from 'next/script';
 const useContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTurnstileValid, setIsTurnstileValid] = useState(false);
+  const [widgetResetKey, setWidgetResetKey] = useState(0);
   const turnstileRef = useRef(null);
 
   const submitForm = useCallback(async (formData) => {
@@ -47,8 +48,30 @@ const useContactForm = () => {
   }, [isTurnstileValid]);
 
   const resetTurnstile = useCallback(() => {
-    if (turnstileRef.current?.reset) {
-      turnstileRef.current.reset();
+    try {
+      // Forcer le rechargement du widget en incrémentant la clé
+      setWidgetResetKey(prev => prev + 1);
+      setIsTurnstileValid(false);
+      
+      // Utiliser l'API Cloudflare Turnstile pour réinitialiser le widget
+      const turnstileContainer = document.querySelector('.cf-turnstile');
+      if (turnstileContainer && window.turnstile) {
+        // Récupérer le widget ID depuis l'attribut data-turnstile-id
+        const widgetId = turnstileContainer.getAttribute('data-turnstile-id');
+        if (widgetId) {
+          window.turnstile.reset(widgetId);
+        } else {
+          // Si pas de widget ID, essayer de réinitialiser tous les widgets
+          window.turnstile.render(turnstileContainer, {
+            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAACC7j2As0DNR32Og",
+            callback: 'onTurnstileSuccess',
+            'expired-callback': 'onTurnstileExpired',
+            'error-callback': 'onTurnstileError'
+          });
+        }
+      }
+    } catch (error) {
+      console.warn('Erreur lors de la réinitialisation Turnstile:', error);
       setIsTurnstileValid(false);
     }
   }, []);
@@ -62,7 +85,7 @@ const useContactForm = () => {
     }
 
     return (
-      <div className="mt-4">
+      <div key={widgetResetKey}>
         <Script 
           src="https://challenges.cloudflare.com/turnstile/v0/api.js" 
           async 
@@ -82,7 +105,7 @@ const useContactForm = () => {
         />
       </div>
     );
-  }, []);
+  }, [widgetResetKey]);
 
   return {
     isSubmitting,

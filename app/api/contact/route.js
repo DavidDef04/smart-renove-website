@@ -16,7 +16,7 @@ export async function POST(req) {
         ).then((r) => r.json());
 
         if (!verifyRes.success) {
-            return new Response(JSON.stringify({ message: "Validation CAPTCHA échouée" }), {
+            return new Response(JSON.stringify({ message: "Validation de sécurité échouée, Veuillez recharger le site svp !" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json" }
             });
