@@ -4,9 +4,7 @@ import { useState, useRef } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import Image from 'next/image';
 import SectionHeader from './ui/SectionHeader';
-import { SITE_IMAGES } from '../data/siteImages';
 import 'swiper/css';
 
 const testimonials = [
@@ -17,7 +15,6 @@ const testimonials = [
     content:
       'Rénovation complète à Bonapriso : électricité, carrelage, peinture et menuiseries. Une équipe coordonnée du début à la fin.',
     rating: 5,
-    image: SITE_IMAGES.about.main,
   },
   {
     id: 2,
@@ -26,7 +23,6 @@ const testimonials = [
     content:
       'Travaux soignés et délais respectés sur la rénovation de nos chambres. Rare et précieux au Cameroun.',
     rating: 5,
-    image: SITE_IMAGES.about.tertiary,
   },
   {
     id: 3,
@@ -35,7 +31,6 @@ const testimonials = [
     content:
       'Vitrines installées avec professionnalisme. Finitions impeccables et SAV réactif.',
     rating: 5,
-    image: SITE_IMAGES.about.bureau,
   },
   {
     id: 4,
@@ -44,9 +39,29 @@ const testimonials = [
     content:
       'Rénovation de mon bureau livrée dans les délais. Équipe sérieuse, je recommande.',
     rating: 5,
-    image: SITE_IMAGES.about.chantier,
   },
-];
+] as const;
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
+}
+
+function TestimonialAvatar({ name }: { name: string }) {
+  return (
+    <div
+      className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--color-night)] text-xs font-bold tracking-wide text-[var(--color-accent)]"
+      aria-hidden
+    >
+      {getInitials(name)}
+    </div>
+  );
+}
 
 export default function Testimonials() {
   const [isBeginning, setIsBeginning] = useState(true);
@@ -118,9 +133,7 @@ export default function Testimonials() {
                   &ldquo;{t.content}&rdquo;
                 </blockquote>
                 <footer className="flex items-center gap-3 pt-4 border-t border-[var(--color-border)]">
-                  <div className="relative h-10 w-10 overflow-hidden shrink-0">
-                    <Image src={t.image} alt={t.name} fill className="object-cover" sizes="40px" />
-                  </div>
+                  <TestimonialAvatar name={t.name} />
                   <div>
                     <p className="font-semibold text-sm">{t.name}</p>
                     <p className="text-xs text-[var(--color-ink-muted)]">{t.role}</p>

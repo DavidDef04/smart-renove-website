@@ -408,7 +408,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10 transition-all transform hover:scale-105"
               >
                 <Phone className="-ml-1 mr-2 h-5 w-5" />
-                +237 694 522 355
+                {SITE.phoneDisplay}
               </Link>
             </div>
           </div>

@@ -50,11 +50,11 @@ export const SITE_SOCIAL = {
 export const SITE = {
   name: 'Smart Rénov',
   email: 'info@srs.cm',
-  phone: '+237694522355',
-  phoneDisplay: '+237 694 522 355',
-  phoneSecondary: '+237675993229',
-  phoneSecondaryDisplay: '+237 675 993 229',
-  whatsapp: 'https://wa.me/237694522355',
+  phone: '+237687185953',
+  phoneDisplay: '+237 6 87 18 59 53',
+  phoneSecondary: '+237694522355',
+  phoneSecondaryDisplay: '+237 694 522 355',
+  whatsapp: 'https://wa.me/237687185953',
   social: SITE_SOCIAL,
   address: {
     line1: 'Rond Point CC',

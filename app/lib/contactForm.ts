@@ -1,3 +1,5 @@
+import { SITE } from './site';
+
 /** Validation et construction du message WhatsApp pour le formulaire contact */
 
 export type ContactFormPayload = {
@@ -87,8 +89,8 @@ export function buildWhatsAppMessage(data: ContactFormPayload): string {
   return lines.join('\n');
 }
 
-/** Numéro WhatsApp business (sans +) */
-export const WHATSAPP_NUMBER = '237694522355';
+/** Numéro WhatsApp business (sans +) — aligné sur SITE.phone */
+export const WHATSAPP_NUMBER = SITE.phone.replace(/\D/g, '');
 
 export function buildWhatsAppUrl(data: ContactFormPayload): string {
   const text = encodeURIComponent(buildWhatsAppMessage(data));

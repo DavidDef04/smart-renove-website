@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Building, Phone, Mail, MapPin, User, Calendar, Shield, FileCheck, ChevronRight, Globe, Briefcase } from 'lucide-react';
 import Link from 'next/link';
+import { SITE } from '@/app/lib/site';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -126,8 +127,8 @@ export default function MentionsLegales() {
                     <Phone className="w-5 h-5 text-[var(--color-orange)] mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">Téléphone</p>
-                      <p className="text-gray-600">+237 694 522 255</p>
-                      <p className="text-gray-600">+237 675 993 229</p>
+                      <p className="text-gray-600">{SITE.phoneDisplay}</p>
+                      <p className="text-gray-600">{SITE.phoneSecondaryDisplay}</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">

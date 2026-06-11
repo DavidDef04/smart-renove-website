@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, Database, UserCheck, Cookie, FileText, Mail, Phone, MapPin, ChevronRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { SITE } from '@/app/lib/site';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -301,7 +302,7 @@ export default function PolitiqueConfidentialite() {
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="flex items-center justify-center space-x-3 text-gray-700">
                 <Phone className="w-5 h-5 text-[var(--color-orange)]" />
-                <span>+237 694 522 255</span>
+                <span>{SITE.phoneDisplay}</span>
               </div>
               <div className="flex items-center justify-center space-x-3 text-gray-700">
                 <Mail className="w-5 h-5 text-[var(--color-orange)]" />
