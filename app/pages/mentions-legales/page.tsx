@@ -49,7 +49,7 @@ export default function MentionsLegales() {
               Mentions <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">Légales</span>
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
-              Informations légales et identification de Smart Renov, votre expert en menuiserie aluminium et vitrerie au Cameroun.
+              Informations légales et identification de Smart Rénov, entreprise de rénovation complète au Cameroun.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium">
@@ -107,7 +107,7 @@ export default function MentionsLegales() {
                     <Globe className="w-5 h-5 text-[var(--color-orange)] mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">Activité Principale</p>
-                      <p className="text-gray-600">Menuiserie aluminium et vitrerie</p>
+                      <p className="text-gray-600">Rénovation complète et menuiserie</p>
                     </div>
                   </div>
                 </div>

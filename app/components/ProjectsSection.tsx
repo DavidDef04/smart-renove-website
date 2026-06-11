@@ -62,7 +62,7 @@ export default function ProjectsSection({
           </h2>
           <div className="w-24 h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full mb-8"></div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Chaque projet est une histoire unique, racontée à travers notre expertise en menuiserie aluminium sur mesure.
+            Chaque projet est une histoire unique : rénovation complète, aménagement ou menuiserie sur mesure.
           </p>
         </div>
         

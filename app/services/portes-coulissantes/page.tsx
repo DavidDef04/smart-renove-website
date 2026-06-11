@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Portes Coulissantes en Aluminium | Smart Renov',
-  description: 'Portes coulissantes élégantes et fonctionnelles en aluminium, idéales pour gagner de l\'espace et créer des espaces modulables. Découvrez nos solutions sur mesure.',
-  keywords: 'portes coulissantes, portes coulissantes aluminium, portes intérieures, aménagement intérieur, gain de place, Smart Renov',
-};
+export const metadata = servicePageMetadata('portes-coulissantes');
 
 export default function PortesCoulissantesPage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Portes coulissantes" slug="portes-coulissantes" />
     <ServiceLayout
       title="PORTES COULISSANTES SUR MESURE"
       description="Nos portes coulissantes en aluminium allient esthétique contemporaine et fonctionnalité. Parfaites pour les espaces restreints ou pour créer une séparation élégante entre les pièces, elles s'intègrent parfaitement à tous les styles d'intérieur."
-      heroImage="/images/portes-coulissantes-hero.jpg"
+      heroImage={SITE_IMAGES.gallery.menuiserie[3]}
       heroTitle="PORTES COULISSANTES ÉLÉGANTES"
       heroDescription="Gagnez de l'espace avec nos portes coulissantes design et fonctionnelles, adaptées à tous vos projets d'aménagement."
       features={[
@@ -57,12 +57,7 @@ export default function PortesCoulissantesPage() {
           "5. Réception - Vérification et mise en service de votre installation."
         ]
       }}
-      gallery={[
-        "/images/portes-coulissantes-1.jpg",
-        "/images/portes-coulissantes-2.jpg",
-        "/images/portes-coulissantes-3.jpg",
-        "/images/portes-coulissantes-4.jpg"
-      ]}
+      gallery={SITE_IMAGES.gallery.menuiserie.slice(2, 6)}
       faqs={[
         {
           question: "Quels sont les avantages des portes coulissantes par rapport aux portes classiques ?",
@@ -90,5 +85,6 @@ export default function PortesCoulissantesPage() {
         }
       ]}
     />
+    </>
   );
 }

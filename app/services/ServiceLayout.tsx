@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ChevronRight, Check, ArrowRight, Phone, Mail, MapPin, Clock, Shield, MoveRight } from 'lucide-react';
 import Footer from '../components/Footer';
+import PageHero from '../components/ui/PageHero';
+import { SITE } from '../lib/site';
 
 // Animation variants
 const fadeInUp = {
@@ -109,79 +111,24 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
   faqs,
 }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      {/* Hero Section */}
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-        className="relative bg-gray-900 overflow-hidden"
+    <div className="min-h-screen bg-[var(--color-surface-soft)]">
+      <PageHero
+        kicker="Service"
+        image={heroImage}
+        imageAlt={title}
+        title={heroTitle}
+        description={heroDescription}
+        align="left"
       >
-        {/* Image de fond avec superposition */}
-        <div className="absolute inset-0">
-          <Image
-            src={heroImage}
-            alt={title}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-            style={{ objectPosition: 'center' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-blue)] via-blue-600 to-[var(--color-orange)] opacity-90" />
-          <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto py-28 px-4 sm:py-36 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp}>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                {heroTitle}
-              </h1>
-              <div className="w-24 h-1.5 bg-gradient-to-r from-yellow-200 to-orange-200 mx-auto my-6 rounded-full"></div>
-              <p className="mt-4 text-xl text-blue-50 max-w-3xl mx-auto leading-relaxed">
-                {heroDescription}
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              variants={fadeInUp}
-              className="mt-12 flex flex-col sm:flex-row justify-center gap-6"
-            >
-              <Link 
-                href="/contact" 
-                className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-semibold text-white rounded-full group"
-              >
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-yellow-200 to-orange-200 group-hover:from-orange-200 group-hover:to-yellow-200 transition-all duration-500"></span>
-                <span className="relative flex items-center">
-                  Demander un devis
-                  <MoveRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-              
-              <Link 
-                href="tel:+237694522355" 
-                className="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium text-white border-2 border-white/20 rounded-full hover:border-white/40 transition-all duration-300"
-              >
-                <Phone className="mr-3 h-5 w-5" />
-                <span>+237 694 522 355</span>
-                <span className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors duration-300"></span>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-        
-        {/* Vague décorative en bas */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-          <svg className="relative block w-full h-16 md:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-white"></path>
-          </svg>
-        </div>
-      </motion.div>
+        <Link href={SITE.routes.contact} className="sr-btn sr-btn--primary group">
+          Demander un devis
+          <MoveRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
+        <Link href={`tel:${SITE.phone}`} className="sr-btn sr-btn--ghost-light">
+          <Phone className="h-4 w-4" />
+          {SITE.phoneDisplay}
+        </Link>
+      </PageHero>
 
       {/* Description du service */}
       <motion.section 
@@ -296,7 +243,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-yellow-200 to-orange-200 mx-auto my-6 rounded-full"></div>
               <p className="text-xl text-gray-600">
-                Découvrez nos projets récents et laissez-vous inspirer par notre savoir-faire en menuiserie aluminium
+                Découvrez nos projets récents et laissez-vous inspirer par notre savoir-faire en rénovation
               </p>
             </div>
 
@@ -321,7 +268,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                       <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <h3 className="text-xl font-bold text-white mb-2">Projet {index + 1}</h3>
-                        <p className="text-blue-100 mb-4">Menuiserie Aluminium</p>
+                        <p className="text-blue-100 mb-4">Rénovation Smart Rénov</p>
                         <button className="inline-flex items-center px-5 py-2.5 bg-white text-[var(--color-blue)] rounded-full font-medium hover:bg-gray-100 transition-colors">
                           Voir plus
                           <MoveRight className="ml-2 h-4 w-4" />
@@ -333,7 +280,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900">Projet {index + 1}</h3>
-                        <p className="text-gray-500">Menuiserie Aluminium</p>
+                        <p className="text-gray-500">Projet rénovation</p>
                       </div>
                       <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-[var(--color-blue)]">
                         {index + 1}
@@ -457,7 +404,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
             </div>
             <div className="ml-3 inline-flex">
               <Link
-                href="tel:+237694522355"
+                href={`tel:${SITE.phone}`}
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10 transition-all transform hover:scale-105"
               >
                 <Phone className="-ml-1 mr-2 h-5 w-5" />
@@ -467,8 +414,8 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
           </div>
           <p className="mt-3 text-sm text-blue-50">
             Ou envoyez-nous un email à :{' '}
-            <a href="mailto:contact@smart-renov.com" className="text-white font-medium underline">
-              contact@smart-renov.com
+            <a href={`mailto:${SITE.email}`} className="text-white font-medium underline">
+              {SITE.email}
             </a>
           </p>
         </div>

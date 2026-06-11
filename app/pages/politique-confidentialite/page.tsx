@@ -86,10 +86,10 @@ export default function PolitiqueConfidentialite() {
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Notre Engagement</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              Chez <span className="font-semibold text-[var(--color-blue)]">Smart Renov</span>, nous nous engageons à protéger votre vie privée et à sécuriser vos données personnelles. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez nos services de menuiserie aluminium et vitrerie.
+              Chez <span className="font-semibold text-[var(--color-blue)]">Smart Rénov</span>, nous nous engageons à protéger votre vie privée. Cette politique explique comment nous traitons vos données lors de vos demandes de rénovation et l&apos;utilisation de nos services.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              En tant qu'entreprise camerounaise spécialisée dans la rénovation et la menuiserie, nous respectons scrupuleusement les réglementations locales et internationales en matière de protection des données.
+              Entreprise camerounaise spécialisée dans la rénovation complète, nous respectons les réglementations en vigueur en matière de protection des données.
             </p>
           </div>
         </motion.div>
@@ -169,7 +169,7 @@ export default function PolitiqueConfidentialite() {
             <h2 className="text-3xl font-bold mb-6">Utilisation de Vos Données</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                "Fournir nos services de menuiserie et vitrerie",
+                "Fournir nos services de rénovation et travaux associés",
                 "Établir des devis personnalisés et précis",
                 "Coordonner les interventions sur vos chantiers",
                 "Améliorer nos produits et services",

@@ -1,18 +1,20 @@
 import React from 'react';
 import { Check, Ruler, Shield, Settings, ThumbsUp, Users, Wrench } from 'lucide-react';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata = {
-  title: 'Menuiserie Aluminium | Smart Renov',
-  description: 'Découvrez nos services de menuiserie aluminium sur mesure pour vos fenêtres, portes et façades vitrées. Qualité et durabilité garanties.',
-};
+export const metadata = servicePageMetadata('menuiserie-aluminium');
 
 const MenuiserieAluminiumPage = () => {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Menuiserie aluminium" slug="menuiserie-aluminium" />
     <ServiceLayout
       title="Menuiserie Aluminium"
       description="Nos solutions en menuiserie aluminium allient esthétisme, performance énergétique et durabilité pour répondre à tous vos besoins en rénovation et construction neuve."
-      heroImage="/images/menuiserie-aluminium-hero.jpg"
+      heroImage={SITE_IMAGES.services.menuiserie}
       heroTitle="Menuiserie Aluminium Haut de Gamme"
       heroDescription="Des solutions sur mesure pour une isolation optimale et un design contemporain"
       features={[
@@ -58,14 +60,7 @@ const MenuiserieAluminiumPage = () => {
           "Réception des travaux et garantie"
         ]
       }}
-      gallery={[
-        "/images/realisation-menuisserie-1.png",
-        "/images/realisation-menuiserie-2.png",
-        "/images/realisation-menuiserie-3.png",
-        "/images/realisation-menuiserie-4.png",
-        "/images/realisation-menuiserie-5.png",
-        "/images/realisation-menuiserie-6.png"
-      ]}
+      gallery={[...SITE_IMAGES.gallery.menuiserie]}
       faqs={[
         {
           question: "Quelle est la durée de vie des menuiseries en aluminium ?",
@@ -93,6 +88,7 @@ const MenuiserieAluminiumPage = () => {
         }
       ]}
     />
+    </>
   );
 };
 

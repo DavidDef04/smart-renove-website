@@ -28,16 +28,16 @@ const item: Variants = {
 export default function ExpertiseSection() {
   const expertisePoints = [
     {
-      title: 'Expertise technique de haut niveau',
-      description: 'Des professionnels qualifiés pour des réalisations d\'exception'
+      title: 'Rénovation clé en main',
+      description: 'Tous les corps de métier coordonnés pour maison et local commercial'
     },
     {
-      title: 'Équipe passionnée et dévouée',
-      description: 'À votre écoute pour concrétiser vos projets les plus ambitieux'
+      title: 'Tous corps de métier',
+      description: 'Électricité, plomberie, carrelage, peinture, menuiserie et plus'
     },
     {
-      title: 'Solutions sur mesure & évolutives',
-      description: 'Des réponses adaptées à vos besoins spécifiques et évolutifs'
+      title: 'Un interlocuteur unique',
+      description: 'Devis, planning et suivi chantier centralisés chez Smart Rénov'
     }
   ];
 

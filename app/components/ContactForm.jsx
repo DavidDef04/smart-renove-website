@@ -1,6 +1,8 @@
 'use client';
+
 import { useState, useRef, useCallback } from 'react';
 import Script from 'next/script';
+import { buildWhatsAppUrl, validateContactForm } from '@/app/lib/contactForm';
 
 const useContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -8,66 +10,79 @@ const useContactForm = () => {
   const [widgetResetKey, setWidgetResetKey] = useState(0);
   const turnstileRef = useRef(null);
 
-  const submitForm = useCallback(async (formData) => {
-    if (!isTurnstileValid) {
-      throw new Error('Veuillez valider le CAPTCHA');
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const data = new FormData();
-      
-      // Convertir l'objet formData en FormData
-      for (const key in formData) {
-        if (formData[key] !== null && formData[key] !== undefined) {
-          data.append(key, formData[key]);
-        }
+  const submitForm = useCallback(
+    async (formData) => {
+      if (!isTurnstileValid) {
+        throw new Error('Veuillez valider le CAPTCHA');
       }
 
-      // Ajouter le token Turnstile
-      const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
-      if (turnstileToken) {
-        data.append('cf-turnstile-response', turnstileToken);
-      }
-
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        body: data,
+      const { valid, errors, sanitized } = validateContactForm({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+        isUrgent: formData.isUrgent,
+        fileName: formData.fileName ?? null,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Erreur lors de l\'envoi du formulaire');
+      if (!valid) {
+        throw new Error(errors[0] ?? 'Formulaire invalide');
       }
 
-      return await response.json();
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [isTurnstileValid]);
+      setIsSubmitting(true);
+
+      try {
+        const data = new FormData();
+        data.append('name', sanitized.name);
+        data.append('email', sanitized.email);
+        data.append('phone', sanitized.phone);
+        data.append('subject', sanitized.subject);
+        data.append('message', sanitized.message);
+        data.append('isUrgent', sanitized.isUrgent ? 'true' : 'false');
+        if (sanitized.fileName) {
+          data.append('fileName', sanitized.fileName);
+        }
+        const honeypotEl = document.querySelector('input[name="website"]');
+        const honeypot = honeypotEl?.value ?? '';
+        data.append('website', honeypot);
+
+        const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
+        if (turnstileToken) {
+          data.append('cf-turnstile-response', turnstileToken);
+        }
+
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: data,
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.message || 'Validation échouée');
+        }
+
+        const whatsappUrl = buildWhatsAppUrl(sanitized);
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+        return { ok: true, whatsappUrl };
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [isTurnstileValid]
+  );
 
   const resetTurnstile = useCallback(() => {
     try {
-      // Forcer le rechargement du widget en incrémentant la clé
-      setWidgetResetKey(prev => prev + 1);
+      setWidgetResetKey((prev) => prev + 1);
       setIsTurnstileValid(false);
-      
-      // Utiliser l'API Cloudflare Turnstile pour réinitialiser le widget
+
       const turnstileContainer = document.querySelector('.cf-turnstile');
       if (turnstileContainer && window.turnstile) {
-        // Récupérer le widget ID depuis l'attribut data-turnstile-id
         const widgetId = turnstileContainer.getAttribute('data-turnstile-id');
         if (widgetId) {
           window.turnstile.reset(widgetId);
-        } else {
-          // Si pas de widget ID, essayer de réinitialiser tous les widgets
-          window.turnstile.render(turnstileContainer, {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAACC7j2As0DNR32Og",
-            callback: 'onTurnstileSuccess',
-            'expired-callback': 'onTurnstileExpired',
-            'error-callback': 'onTurnstileError'
-          });
         }
       }
     } catch (error) {
@@ -77,7 +92,6 @@ const useContactForm = () => {
   }, []);
 
   const TurnstileWidget = useCallback(() => {
-    // Définir les callbacks globaux pour Turnstile
     if (typeof window !== 'undefined') {
       window.onTurnstileSuccess = () => setIsTurnstileValid(true);
       window.onTurnstileExpired = () => setIsTurnstileValid(false);
@@ -86,18 +100,15 @@ const useContactForm = () => {
 
     return (
       <div key={widgetResetKey}>
-        <Script 
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js" 
-          async 
-          defer 
-          onLoad={() => {
-            // Réinitialiser l'état de validation au chargement
-            setIsTurnstileValid(false);
-          }}
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async
+          defer
+          onLoad={() => setIsTurnstileValid(false)}
         />
         <div
           className="cf-turnstile"
-          data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAACC7j2As0DNR32Og"}
+          data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAACC7j2As0DNR32Og'}
           data-callback="onTurnstileSuccess"
           data-expired-callback="onTurnstileExpired"
           data-error-callback="onTurnstileError"

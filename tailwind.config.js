@@ -7,9 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
+      },
       colors: {
         'color-blue': 'var(--color-blue)',
         'color-orange': 'var(--color-orange)',
+        cream: 'var(--color-cream)',
+        ink: 'var(--color-ink)',
+        'ink-muted': 'var(--color-ink-muted)',
       },
       keyframes: {
         float: {

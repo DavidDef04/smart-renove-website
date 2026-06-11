@@ -1,18 +1,20 @@
 import React from 'react';
 import { MoveRight, Sun, Shield, Maximize2, Leaf, Ruler } from 'lucide-react';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata = {
-  title: 'Baies Coulissantes | Smart Renov',
-  description: 'Découvrez nos baies coulissantes élégantes et fonctionnelles pour une ouverture maximale sur l\'extérieur. Lumière naturelle et espace optimisé.',
-};
+export const metadata = servicePageMetadata('baies-coulissantes');
 
 const BaiesCoulissantesPage = () => {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Baies coulissantes" slug="baies-coulissantes" />
     <ServiceLayout
       title="Baies Coulissantes"
       description="Nos baies coulissantes allient élégance et fonctionnalité pour créer des espaces lumineux et ouverts sur l'extérieur, tout en garantissant une excellente isolation et sécurité."
-      heroImage="/images/baies-coulissantes-hero.jpg"
+      heroImage={SITE_IMAGES.services.baies}
       heroTitle="Baies Coulissantes Élégantes"
       heroDescription="Ouvrez grand vos espaces sur l'extérieur avec nos solutions sur mesure"
       features={[
@@ -58,14 +60,7 @@ const BaiesCoulissantesPage = () => {
           "Contrôle qualité et mise en service"
         ]
       }}
-      gallery={[
-        "/images/baie-coulissante-1.png",
-        "/images/baies-coulissantes.jpg",
-        "/images/formationsisolation-thermique.jpg",
-        "/images/baie-coulissante-4.png",
-        "/images/baie-coulisante5.png",
-        "/images/baie-coulisante6.png"
-      ]}
+      gallery={[...SITE_IMAGES.gallery.menuiserie]}
       faqs={[
         {
           question: "Quelle est la durée de vie d'une baie coulissante ?",
@@ -93,6 +88,7 @@ const BaiesCoulissantesPage = () => {
         }
       ]}
     />
+    </>
   );
 };
 

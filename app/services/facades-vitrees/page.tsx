@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Façades Vitrées en Aluminium | Smart Renov',
-  description: 'Solutions de façades vitrées sur mesure en aluminium pour un design contemporain et des performances optimales. Découvrez nos réalisations et demandez un devis personnalisé.',
-  keywords: 'façades vitrées, aluminium, vitrage, architecture moderne, rénovation, construction, Smart Renov',
-};
+export const metadata = servicePageMetadata('facades-vitrees');
 
 export default function FacadesVitreesPage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Façades vitrées" slug="facades-vitrees" />
     <ServiceLayout
       title="FAÇADES VITRÉES SUR MESURE"
       description="Nos façades vitrées en aluminium allient esthétique contemporaine et performances techniques exceptionnelles. Que ce soit pour un bâtiment professionnel ou une résidence privée, nos solutions sur mesure apportent lumière naturelle et modernité à vos espaces."
-      heroImage="/images/facades-vitrees-hero.jpg"
+      heroImage={SITE_IMAGES.services.facade}
       heroTitle="FAÇADES VITRÉES HAUT DE GAMME"
       heroDescription="Des solutions architecturales innovantes pour des bâtiments lumineux et performants énergétiquement."
       features={[
@@ -58,12 +58,7 @@ export default function FacadesVitreesPage() {
           "6. Service après-vente - Suivi et entretien pour une durabilité optimale."
         ]
       }}
-      gallery={[
-        "/images/facades-vitrees-1.jpg",
-        "/images/facades-vitrees-2.jpg",
-        "/images/facades-vitrees-3.jpg",
-        "/images/facades-vitrees-4.jpg"
-      ]}
+      gallery={[...SITE_IMAGES.gallery.facade]}
       faqs={[
         {
           question: "Quels sont les avantages d'une façade vitrée en aluminium ?",
@@ -91,5 +86,6 @@ export default function FacadesVitreesPage() {
         }
       ]}
     />
+    </>
   );
 }

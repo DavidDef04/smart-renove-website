@@ -36,7 +36,7 @@ const ServicesHero = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/services-hero.jpg"
-          alt="Services de menuiserie aluminium"
+          alt="Services de rénovation Smart Rénov"
           fill
           className="object-cover"
           priority
@@ -57,14 +57,14 @@ const ServicesHero = () => {
           className="text-4xl md:text-6xl font-bold text-white mb-6"
           variants={item}
         >
-          Menuiserie Aluminium <span className="text-[var(--color-orange)]">Haut de Gamme</span>
+          Rénovation <span className="text-[var(--color-orange)]">clé en main</span>
         </motion.h1>
         
         <motion.p 
           className="text-xl text-white/90 max-w-3xl mx-auto mb-12"
           variants={item}
         >
-          Découvrez notre expertise en menuiserie aluminium pour des solutions durables, esthétiques et performantes.
+          Tous les métiers pour transformer votre maison ou votre local : second œuvre, finitions et menuiserie aluminium.
         </motion.p>
         
         <motion.div

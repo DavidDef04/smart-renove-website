@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Maintenance & SAV Menuiseries Aluminium | Smart Renov',
-  description: "Service après-vente et maintenance préventive pour vos menuiseries en aluminium. Entretien, dépannage et rénovation pour préserver la performance et l'esthétique de vos installations.",
-  keywords: 'maintenance menuiseries, SAV aluminium, entretien fenêtres, réparation portes, service après-vente, Smart Renov',
-};
+export const metadata = servicePageMetadata('maintenance');
 
 export default function MaintenancePage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Maintenance & SAV" slug="maintenance" />
     <ServiceLayout
       title="MAINTENANCE & SERVICE APRÈS-VENTE"
       description="Notre service de maintenance et SAV prend soin de vos menuiseries en aluminium tout au long de leur cycle de vie. De l'entretien préventif aux réparations courantes, nos techniciens qualifiés interviennent rapidement pour garantir la longévité et les performances optimales de vos installations."
-      heroImage="/images/maintenance-hero.jpg"
+      heroImage={SITE_IMAGES.services.maintenance}
       heroTitle="VOTRE SATISFACTION, NOTRE ENGAGEMENT"
       heroDescription="Un service après-vente réactif et des contrats de maintenance sur mesure pour une tranquillité d'esprit totale."
       features={[
@@ -58,10 +58,10 @@ export default function MaintenancePage() {
         ]
       }}
       gallery={[
-        "/images/maintenance-1.jpg",
-        "/images/maintenance-2.jpg",
-        "/images/maintenance-3.jpg",
-        "/images/maintenance-4.jpg"
+        SITE_IMAGES.about.secondary,
+        SITE_IMAGES.gallery.menuiserie[0],
+        SITE_IMAGES.about.chantier,
+        SITE_IMAGES.formations.equipe,
       ]}
       faqs={[
         {
@@ -90,5 +90,6 @@ export default function MaintenancePage() {
         }
       ]}
     />
+    </>
   );
 }

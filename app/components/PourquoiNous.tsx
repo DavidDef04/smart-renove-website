@@ -2,12 +2,13 @@
 
 import { CheckCircle2, Award, Shield, Clock } from 'lucide-react';
 import Image from 'next/image';
+import { SITE_IMAGES } from '../data/siteImages';
 
 const qualities = [
   {
     id: 1,
     title: "Expertise Technique",
-    description: "Une équipe qualifiée avec des années d'expérience dans la menuiserie aluminium.",
+    description: "Une équipe pluridisciplinaire pour la rénovation complète et les finitions de qualité.",
     icon: Award,
   },
   {
@@ -40,8 +41,8 @@ export default function PourquoiNous() {
             {/* Main Image */}
             <div className="absolute inset-0 w-4/5 h-4/5 mx-auto rounded-2xl overflow-hidden border-4 border-white shadow-2xl z-10">
               <Image
-                src="/images/pourquoiNous1.png"
-                alt="Projet de menuiserie aluminium"
+                src={SITE_IMAGES.pourquoiNous.main}
+                alt="Projet de rénovation Smart Rénov"
                 fill
                 className="object-cover"
               />
@@ -54,8 +55,8 @@ export default function PourquoiNous() {
             {/* Small Image 1 */}
             <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full border-4 border-white shadow-lg overflow-hidden z-20">
               <Image
-                src="/images/pourquoiNous3.png"
-                alt="Détail de menuiserie"
+                src={SITE_IMAGES.pourquoiNous.small1}
+                alt="Détail de finition chantier"
                 fill
                 className="object-cover"
               />
@@ -64,7 +65,7 @@ export default function PourquoiNous() {
             {/* Small Image 2 */}
             <div className="absolute top-10 right-10 w-28 h-28 rounded-2xl border-4 border-white shadow-lg overflow-hidden z-20 transform rotate-6">
               <Image
-                src="/images/pourquoiNous2.png"
+                src={SITE_IMAGES.pourquoiNous.small2}
                 alt="Projet d'installation"
                 fill
                 className="object-cover"
@@ -79,14 +80,15 @@ export default function PourquoiNous() {
           {/* Right Side - Content */}
           <div className="space-y-8">
             <div className="inline-block">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 relative">
+              <h2 className="mb-6 relative">
                 POURQUOI CHOISIR <span className="text-[var(--color-blue)]">SMART RENOV</span>
                 <span className="absolute bottom-0 left-0 w-1/3 h-1 bg-gradient-to-r from-[var(--color-blue)] via-white to-[var(--color-orange)]"></span>
               </h2>
             </div>
             
             <p className="text-gray-600 text-lg leading-relaxed">
-              Découvrez pourquoi des centaines de clients nous font confiance pour leurs projets de menuiserie aluminium. Notre engagement envers l'excellence et la satisfaction client fait de nous le partenaire idéal pour concrétiser vos idées.
+              Découvrez pourquoi des centaines de clients nous confient leurs rénovations complètes ou partielles.
+              Un seul interlocuteur, une équipe coordonnée et un résultat durable pour votre maison ou votre local.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

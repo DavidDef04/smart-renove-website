@@ -22,7 +22,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="group relative overflow-hidden bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col border border-gray-100"
+      className="group relative overflow-hidden bg-white  shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col border border-gray-100"
     >
       {/* Image du service */}
       <div className="relative h-48 overflow-hidden">

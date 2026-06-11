@@ -1,25 +1,27 @@
 import Hero from './components/Hero';
-import ExpertiseSection from './components/ExpertiseSection';
+import TrustMarquee from './components/TrustMarquee';
+import RenovationCompleteSection from './components/RenovationCompleteSection';
 import About from './components/About';
 import StatsSection from './components/StatsSection';
-import PourquoiNous from './components/PourquoiNous';
-import Services from './components/Services';
 import FormationsSection from './components/FormationsSection';
+import Services from './components/Services';
 import Testimonials from './components/Testimonials';
+import ConversionBand from './components/ConversionBand';
 import Footer from './components/Footer';
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Hero />
-      <ExpertiseSection />
+      <TrustMarquee />
+      <RenovationCompleteSection />
       <About />
       <StatsSection />
-      <PourquoiNous />
-      <FormationsSection />
       <Services />
+      <FormationsSection />
       <Testimonials />
+      <ConversionBand />
       <Footer />
-    </main>
+    </>
   );
 }

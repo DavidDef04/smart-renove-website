@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Verrières sur Mesure | Smart Renov',
-  description: 'Verrières élégantes et fonctionnelles en aluminium pour apporter lumière et modernité à vos espaces intérieurs. Solutions sur mesure pour une décoration contemporaine.',
-  keywords: 'verrières, verrière intérieure, cloisons vitrées, séparation d\'espace, aménagement intérieur, aluminium, Smart Renov',
-};
+export const metadata = servicePageMetadata('verrieres');
 
 export default function VerrieresPage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Verrières" slug="verrieres" />
     <ServiceLayout
       title="VERRIÈRES SUR MESURE"
       description="Nos verrières en aluminium apportent une touche d'élégance et de modernité à vos intérieurs. Que ce soit pour séparer des espaces tout en laissant passer la lumière ou pour créer une extension lumineuse, nos solutions sur mesure s'adaptent à tous les styles d'habitation."
-      heroImage="/images/verrieres-hero.jpg"
+      heroImage={SITE_IMAGES.gallery.menuiserie[4]}
       heroTitle="VERRIÈRES ÉLÉGANTES POUR VOTRE INTÉRIEUR"
       heroDescription="Des solutions sur mesure pour des espaces lumineux et ouverts, tout en préservant l'intimité de chaque pièce."
       features={[
@@ -58,10 +58,10 @@ export default function VerrieresPage() {
         ]
       }}
       gallery={[
-        "/images/verrieres-1.jpg",
-        "/images/verrieres-2.jpg",
-        "/images/verrieres-3.jpg",
-        "/images/verrieres-4.jpg"
+        SITE_IMAGES.gallery.menuiserie[4],
+        SITE_IMAGES.gallery.menuiserie[3],
+        SITE_IMAGES.gallery.menuiserie[1],
+        SITE_IMAGES.gallery.menuiserie[5],
       ]}
       faqs={[
         {
@@ -90,5 +90,6 @@ export default function VerrieresPage() {
         }
       ]}
     />
+    </>
   );
 }

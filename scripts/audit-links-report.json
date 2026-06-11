@@ -1,0 +1,67 @@
+{
+  "routes": [
+    "/",
+    "/about",
+    "/contact",
+    "/formations",
+    "/pages/about",
+    "/pages/conditions-utilisation",
+    "/pages/mentions-legales",
+    "/pages/politique-confidentialite",
+    "/pages/realisations",
+    "/realisations",
+    "/renovation-complete",
+    "/services",
+    "/services/agencements",
+    "/services/baies-coulissantes",
+    "/services/facades-vitrees",
+    "/services/isolation-thermique",
+    "/services/maintenance",
+    "/services/menuiserie-aluminium",
+    "/services/portes-coulissantes",
+    "/services/portes-entree",
+    "/services/renovation",
+    "/services/securite",
+    "/services/verrieres"
+  ],
+  "missing": [],
+  "notes": [
+    {
+      "item": "/services#sur-mesure",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services#projets-commerciaux",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services#fourniture-pose",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services#serrurerie",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services#menuiserie",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services#renovation",
+      "note": "ancre sur /services — pas de page dédiée (contact ou /services)"
+    },
+    {
+      "item": "/services/electricite",
+      "note": "pas de page — redirige vers /renovation-complete via servicesData"
+    },
+    {
+      "item": "/about-hero-poster.jpg",
+      "note": "fichier manquant (AboutHero vidéo retirée)"
+    },
+    {
+      "item": "/videos/videoabout.mp4",
+      "note": "vidéo about absente du dossier public"
+    }
+  ],
+  "totalLinks": 5
+}

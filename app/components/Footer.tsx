@@ -1,14 +1,16 @@
 'use client';
 
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
-import Image from 'next/image';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import SocialLinks from './SocialLinks';
 import Link from 'next/link';
+import Logo from './Logo';
+import { SITE, SITE_MESSAGING } from '../lib/site';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-b from-[var(--color-blue)] to-blue-800 text-white pt-16 pb-8 relative overflow-hidden">
+    <footer className="mesh-dark text-white pt-16 pb-8 relative overflow-hidden noise-overlay">
       {/* Background elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:20px_20px]"></div>
       <div className="absolute -right-20 -top-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -18,39 +20,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Company Info */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <Image 
-                  src="/favicon.png" 
-                  alt="Logo Smart Renov" 
-                  width={32} 
-                  height={32}
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-2xl font-bold">Smart Renov</span>
-            </div>
+            <Logo size="lg" />
             <p className="text-blue-100">
-              Votre partenaire de confiance pour des solutions de menuiserie aluminium sur mesure, alliant qualité, durabilité et design innovant.
+              {SITE_MESSAGING.footerAbout}
             </p>
-            <div className="flex space-x-4 pt-2">
-              <a href="#" className="group relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[var(--color-orange)]/20">
-                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/0 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="group relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[var(--color-orange)]/20">
-                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/0 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="group relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[var(--color-orange)]/20">
-                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/0 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="group relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[var(--color-orange)]/20">
-                <span className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/0 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <SocialLinks variant="footer" size={18} className="pt-2" showYoutube />
           </div>
 
           {/* Quick Links */}
@@ -61,11 +35,11 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { name: 'Accueil', href: '/' },
-                { name: 'Services', href: '/services' },
-                { name: 'À Propos', href: '/pages/about' },
-                { name: 'Projets', href: '/pages/realisations' },
-                { name: 'Contact', href: '/pages/contact' },
+                { name: 'Accueil', href: SITE.routes.home },
+                { name: 'Services', href: SITE.routes.services },
+                { name: 'À Propos', href: SITE.routes.about },
+                { name: 'Projets', href: SITE.routes.realisations },
+                { name: 'Contact', href: SITE.routes.contact },
               ].map((item, index) => (
                 <li key={index}>
                   <Link 
@@ -89,10 +63,13 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { name: 'Menuiserie Aluminium', href: '/services/menuiserie-aluminium' },
+                { name: 'Rénovation complète', href: SITE.routes.renovationComplete, className: 'text-[var(--color-orange)] font-medium' },
+                { name: 'Électricité & plomberie', href: SITE.routes.renovationComplete },
+                { name: 'Carrelage & peinture', href: SITE.routes.renovationComplete },
+                { name: 'Menuiserie aluminium', href: '/services/menuiserie-aluminium' },
                 { name: 'Baies Coulissantes', href: '/services/baies-coulissantes' },
                 { name: 'Portes d\'Entrée', href: '/services/portes-entree' },
-                { name: 'Nos Formations', href: '/formations', className: 'text-[var(--color-orange)] font-medium' }
+                { name: 'Nos Formations', href: '/formations' }
               ].map((service, index) => (
                 <li key={index}>
                   <Link 
@@ -148,16 +125,16 @@ const Footer = () => {
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-[var(--color-orange)] flex-shrink-0" />
                   <div className="ml-3 space-y-2">
-                    <a href="tel:+237694522355" className="group relative text-blue-100 hover:text-white transition-all duration-300 block">
+                    <a href={`tel:${SITE.phone}`} className="group relative text-blue-100 hover:text-white transition-all duration-300 block">
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
                       <span className="relative group-hover:translate-x-1 transition-transform duration-300 inline-block">
-                        +237 694 522 355
+                        {SITE.phoneDisplay}
                       </span>
                     </a>
-                    <a href="tel:+237675993229" className="group relative text-blue-100 hover:text-white transition-all duration-300 block">
+                    <a href={`tel:${SITE.phoneSecondary}`} className="group relative text-blue-100 hover:text-white transition-all duration-300 block">
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
                       <span className="relative group-hover:translate-x-1 transition-transform duration-300 inline-block">
-                        +237 675 993 229
+                        {SITE.phoneSecondaryDisplay}
                       </span>
                     </a>
                   </div>
@@ -165,10 +142,10 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-[var(--color-orange)]" />
-                <a href="mailto:info@srs.cm" className="group relative ml-3 text-blue-100 hover:text-white transition-all duration-300">
+                <a href={`mailto:${SITE.email}`} className="group relative ml-3 text-blue-100 hover:text-white transition-all duration-300">
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
                 <span className="relative group-hover:translate-x-1 transition-transform duration-300">
-                    info@srs.cm
+                    {SITE.email}
                 </span>
                 </a>
               </li>
@@ -185,19 +162,19 @@ const Footer = () => {
             © {currentYear} Smart Renov. Tous droits réservés.
           </p>
           <div className="flex space-x-6">
-            <a href="/pages/politique-confidentialite" className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
+            <a href={SITE.routes.privacy} className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
               <span className="relative group-hover:translate-x-1 transition-transform duration-300">
                 Politique de confidentialité
               </span>
             </a>
-            <a href="/pages/conditions-utilisation" className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
+            <a href={SITE.routes.terms} className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
               <span className="relative group-hover:translate-x-1 transition-transform duration-300">
                 Conditions d'utilisation
               </span>
             </a>
-            <a href="/pages/mentions-legales" className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
+            <a href={SITE.routes.legal} className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-orange)] transition-all duration-300 group-hover:w-full"></span>
               <span className="relative group-hover:translate-x-1 transition-transform duration-300">
                 Mentions légales

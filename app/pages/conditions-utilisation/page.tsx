@@ -49,7 +49,7 @@ export default function ConditionsUtilisation() {
               Conditions d'<span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">Utilisation</span>
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
-              Les règles qui encadrent nos services de menuiserie aluminium et vitrerie pour une collaboration transparente et efficace.
+              Les règles qui encadrent nos prestations de rénovation et nos services par métier pour une collaboration transparente.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium">
@@ -86,7 +86,7 @@ export default function ConditionsUtilisation() {
           <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 border border-gray-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Notre Contrat de Service</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              Bienvenue chez <span className="font-semibold text-[var(--color-blue)]">Smart Renov</span>. Ces conditions d'utilisation définissent le cadre de notre collaboration pour tous vos projets de menuiserie aluminium, vitrerie et rénovation au Cameroun.
+              Bienvenue chez <span className="font-semibold text-[var(--color-blue)]">Smart Rénov</span>. Ces conditions définissent le cadre de notre collaboration pour vos projets de rénovation complète ou partielle au Cameroun.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               En utilisant nos services, vous acceptez ces termes qui visent à assurer une relation professionnelle transparente et bénéfique pour toutes les parties.
@@ -106,7 +106,7 @@ export default function ConditionsUtilisation() {
             {
               icon: <Wrench className="w-6 h-6" />,
               title: "Services Proposés",
-              description: "Menuiserie aluminium, vitrerie, baies coulissantes, façades, isolation",
+              description: "Rénovation clé en main, électricité, plomberie, carrelage, peinture, menuiserie",
               color: "from-blue-500 to-blue-600"
             },
             {

@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Sécurité Renforcée pour Menuiseries | Smart Renov',
-  description: 'Systèmes de sécurité avancés pour vos menuiseries en aluminium. Protégez votre domicile ou votre entreprise avec nos solutions anti-effraction et de sécurité renforcée.',
-  keywords: 'sécurité renforcée, portes blindées, fenêtres sécurisées, protection anti-effraction, vitrage de sécurité, Smart Renov',
-};
+export const metadata = servicePageMetadata('securite');
 
 export default function SecuritePage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Sécurité renforcée" slug="securite" />
     <ServiceLayout
       title="SÉCURITÉ RENFORCÉE POUR VOTRE HABITAT"
       description="Nos solutions de sécurité pour menuiseries en aluminium vous offrent une protection optimale contre les tentatives d'effraction, tout en conservant l'esthétique de votre habitation. Découvrez nos gammes de produits certifiés A2P et répondant aux normes de sécurité en vigueur."
-      heroImage="/images/securite-hero.jpg"
+      heroImage={SITE_IMAGES.services.securite}
       heroTitle="PROTÉGEZ VOTRE INTÉRIEUR AVEC NOS SOLUTIONS HAUT DE GAMME"
       heroDescription="Des systèmes de sécurité discrets et efficaces pour une protection maximale de votre domicile ou entreprise."
       features={[
@@ -58,10 +58,10 @@ export default function SecuritePage() {
         ]
       }}
       gallery={[
-        "/images/securite-1.jpg",
-        "/images/securite-2.jpg",
-        "/images/securite-3.jpg",
-        "/images/securite-4.jpg"
+        SITE_IMAGES.services.securite,
+        SITE_IMAGES.gallery.menuiserie[1],
+        SITE_IMAGES.gallery.menuiserie[2],
+        SITE_IMAGES.gallery.menuiserie[0],
       ]}
       faqs={[
         {
@@ -90,5 +90,6 @@ export default function SecuritePage() {
         }
       ]}
     />
+    </>
   );
 }

@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata: Metadata = {
-  title: 'Agencements Intérieurs en Aluminium | Smart Renov',
-  description: 'Solutions d\'agencement intérieur sur mesure en aluminium. Cloisons, séparations d\'espace et aménagements intérieurs design et fonctionnels pour optimiser vos surfaces.',
-  keywords: 'agencement intérieur, cloisons amovibles, séparation d\'espace, aménagement sur mesure, design intérieur, Smart Renov',
-};
+export const metadata = servicePageMetadata('agencements');
 
 export default function AgencementsPage() {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Agencements intérieurs" slug="agencements" />
     <ServiceLayout
       title="AGENCEMENTS INTÉRIEURS SUR MESURE"
       description="Donnez vie à vos espaces intérieurs avec nos solutions d'agencement en aluminium sur mesure. Que vous souhaitiez séparer des pièces, créer des espaces de rangement ou apporter une touche design à votre intérieur, nos solutions s'adaptent à tous vos besoins et à tous les styles."
-      heroImage="/images/agencements-hero.jpg"
+      heroImage={SITE_IMAGES.services.agencement}
       heroTitle="RÉINVENTEZ VOS ESPACES INTÉRIEURS"
       heroDescription="Des solutions d'agencement sur mesure pour optimiser l'espace et le rendre plus fonctionnel."
       features={[
@@ -58,10 +58,10 @@ export default function AgencementsPage() {
         ]
       }}
       gallery={[
-        "/images/agencements-1.jpg",
-        "/images/agencements-2.jpg",
-        "/images/agencements-3.jpg",
-        "/images/agencements-4.jpg"
+        SITE_IMAGES.services.agencement,
+        SITE_IMAGES.gallery.menuiserie[5],
+        SITE_IMAGES.gallery.menuiserie[3],
+        SITE_IMAGES.about.bureau,
       ]}
       faqs={[
         {
@@ -90,5 +90,6 @@ export default function AgencementsPage() {
         }
       ]}
     />
+    </>
   );
 }

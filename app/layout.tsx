@@ -1,22 +1,35 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
-import TopBar from "./components/TopBar";
+import type { Metadata, Viewport } from 'next';
+import { Syne, DM_Sans } from 'next/font/google';
+import './globals.css';
+import Navbar from './components/Navbar';
+import TopBar from './components/TopBar';
+import FloatingContact from './components/FloatingContact';
+import StructuredData from './components/StructuredData';
+import { buildRootMetadata, localBusinessJsonLd, webSiteJsonLd } from './lib/seo';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const fontDisplay = Syne({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-display',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const fontBody = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: "Smart Rénov - Menuiserie Aluminium",
-  description: "Expert en menuiserie aluminium sur mesure pour vos fenêtres, portes, vérandas et plus encore.",
+export const metadata: Metadata = buildRootMetadata();
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#1e40af' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+  ],
 };
 
 export default function RootLayout({
@@ -25,15 +38,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="fr-CM" className={`${fontDisplay.variable} ${fontBody.variable}`}>
+      <body className="font-sans antialiased">
+        <StructuredData data={[localBusinessJsonLd(), webSiteJsonLd()]} />
         <header className="fixed top-0 left-0 right-0 z-50">
           <TopBar />
           <Navbar />
         </header>
-        <main className="pt-40">
-          {children}
-        </main>
+        <main>{children}</main>
+        <FloatingContact />
       </body>
     </html>
   );

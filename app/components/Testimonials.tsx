@@ -2,263 +2,135 @@
 
 import { useState, useRef } from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import Image from 'next/image';
+import SectionHeader from './ui/SectionHeader';
+import { SITE_IMAGES } from '../data/siteImages';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 const testimonials = [
   {
     id: 1,
-    name: "Awa Mballa",
-    role: "Propriétaire à Douala",
-    content: "Service professionnel et de qualité. L'équipe a su me conseiller sur le meilleur choix de menuiserie pour ma résidence à Bonapriso. Je recommande vivement !",
+    name: 'Awa Mballa',
+    role: 'Propriétaire · Douala',
+    content:
+      'Rénovation complète à Bonapriso : électricité, carrelage, peinture et menuiseries. Une équipe coordonnée du début à la fin.',
     rating: 5,
-    image: "/images/testimonial1.jpg"
+    image: SITE_IMAGES.about.main,
   },
   {
     id: 2,
-    name: "Jean-Baptiste Nkoulou",
-    role: "Gérant d'hôtel à Yaoundé",
-    content: "Excellente prestation pour la rénovation de nos chambres. Travail soigné et respect des délais, ce qui est rare à trouver. Je reviendrai certainement.",
+    name: 'Jean-Baptiste Nkoulou',
+    role: 'Gérant d\'hôtel · Yaoundé',
+    content:
+      'Travaux soignés et délais respectés sur la rénovation de nos chambres. Rare et précieux au Cameroun.',
     rating: 5,
-    image: "/images/testimonial2.jpg"
+    image: SITE_IMAGES.about.tertiary,
   },
   {
     id: 3,
-    name: "Fatimatou Ousmanou",
-    role: "Commerçante à Garoua",
-    content: "Installation de mes vitrines réalisée avec professionnalisme. Les finitions sont impeccables et le service après-vente est réactif. Très satisfaite !",
+    name: 'Fatimatou Ousmanou',
+    role: 'Commerçante · Garoua',
+    content:
+      'Vitrines installées avec professionnalisme. Finitions impeccables et SAV réactif.',
     rating: 5,
-    image: "/images/testimonial3.jpg"
+    image: SITE_IMAGES.about.bureau,
   },
   {
     id: 4,
-    name: "Arsène Mbarga",
-    role: "Entrepreneur à Bafoussam",
-    content: "Une équipe sérieuse et compétente. Les travaux de rénovation de mon bureau ont été réalisés dans les délais impartis. Je recommande les yeux fermés.",
+    name: 'Arsène Mbarga',
+    role: 'Entrepreneur · Bafoussam',
+    content:
+      'Rénovation de mon bureau livrée dans les délais. Équipe sérieuse, je recommande.',
     rating: 5,
-    image: "/images/testimonial4.jpg"
-  }
+    image: SITE_IMAGES.about.chantier,
+  },
 ];
 
-const Testimonials = () => {
+export default function Testimonials() {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperRef>(null);
 
-  const prevSlide = () => {
-    if (swiperRef.current && !isBeginning) {
-      swiperRef.current.swiper.slidePrev();
-    }
-  };
-
-  const nextSlide = () => {
-    if (swiperRef.current && !isEnd) {
-      swiperRef.current.swiper.slideNext();
-    }
-  };
-
   return (
-    <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -right-20 -top-20 w-64 h-64 bg-[var(--color-blue)]/5 rounded-full blur-3xl"></div>
-        <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-[var(--color-orange)]/5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="inline-block text-[var(--color-orange)] font-medium mb-4">TÉMOIGNAGES</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Ce Que Nos Clients <span className="bg-gradient-to-r from-[var(--color-blue)] to-blue-600 bg-clip-text text-transparent">Pensent</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-orange)] to-amber-500 mx-auto mb-6 rounded-full"></div>
-          <p className="text-gray-600 text-lg">
-            Découvrez les retours de nos clients satisfaits qui nous ont fait confiance pour leurs projets de menuiserie aluminium et de rénovation.
-          </p>
-        </div>
-
-        {/* Slider Navigation Buttons */}
-        <div className="flex justify-end mb-8">
-          <div className="flex space-x-3">
-            <button 
-              onClick={prevSlide}
+    <section className="sr-section sr-section--cream">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <SectionHeader
+            index="06"
+            kicker="Clients"
+            align="left"
+            className="mb-0"
+            title={
+              <>
+                Ils nous ont fait <em>confiance</em>
+              </>
+            }
+            description="Retours de particuliers et professionnels après rénovation complète ou menuiserie."
+          />
+          <div className="flex gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => swiperRef.current?.swiper.slidePrev()}
               disabled={isBeginning}
-              className={`w-12 h-12 rounded-full flex items-center justify-center ${isBeginning ? 'bg-gray-200 text-gray-400' : 'bg-white text-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white'} shadow-md transition-all duration-300`}
+              className="sr-btn sr-btn--ghost !p-3 disabled:opacity-30"
+              aria-label="Témoignage précédent"
             >
-              <ChevronLeft className="w-6 h-6" aria-hidden="true" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
-            <button 
-              onClick={nextSlide}
+            <button
+              type="button"
+              onClick={() => swiperRef.current?.swiper.slideNext()}
               disabled={isEnd}
-              className={`w-12 h-12 rounded-full flex items-center justify-center ${isEnd ? 'bg-gray-200 text-gray-400' : 'bg-white text-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-white'} shadow-md transition-all duration-300`}
+              className="sr-btn sr-btn--ghost !p-3 disabled:opacity-30"
+              aria-label="Témoignage suivant"
             >
-              <ChevronRight className="w-6 h-6" aria-hidden="true" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </div>
         </div>
 
-        {/* Testimonials Slider */}
-        <div className="relative">
-          <Swiper
-            ref={swiperRef}
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            loop={false}
-            onInit={() => {}}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onReachBeginning={() => setIsBeginning(true)}
-            onReachEnd={() => setIsEnd(false)}
-            className="py-4"
-          >
-            {testimonials.map((testimonial) => (
-              <SwiperSlide key={testimonial.id}>
-                <div className="h-full">
-                  <div className="bg-white rounded-2xl p-8 h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    {/* Rating */}
-                    <div className="flex mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`w-5 h-5 ${i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="text-gray-700 italic">&ldquo;{testimonial.content}&rdquo;</div>
-                    
-                    {/* Author */}
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 mr-4">
-                        <Image
-                          src={testimonial.image}
-                          alt={`Photo de ${testimonial.name}`}
-                          width={64}
-                          height={64}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
-                          priority
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                        <p className="text-sm text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </div>
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          onSlideChange={(swiper) => {
+            setIsBeginning(swiper.isBeginning);
+            setIsEnd(swiper.isEnd);
+          }}
+        >
+          {testimonials.map((t) => (
+            <SwiperSlide key={t.id}>
+              <article className="h-full bg-white border border-[var(--color-border)] p-6 flex flex-col" style={{ borderRadius: 'var(--sr-radius-lg)' }}>
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-[var(--color-accent)] fill-[var(--color-accent)]" />
+                  ))}
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
-        {/* Brand Logos - Infinite Scrolling */}
-        <div className="mt-20 pt-12 relative">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-6">
-            <h3 className="text-center text-xl font-bold text-gray-800 bg-gradient-to-r from-[var(--color-blue)] to-blue-600 bg-clip-text text-transparent">
-              NOS PARTENAIRES
-            </h3>
-            <div className="w-16 h-1 bg-gradient-to-r from-[var(--color-orange)] to-amber-500 mx-auto mt-2 rounded-full"></div>
-          </div>
-          
-          <div className="relative overflow-hidden py-6">
-            {/* Gradient overlays */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
-            
-            {/* Infinite scrolling logos */}
-            <div className="flex items-center space-x-10 md:space-x-16 animate-infinite-scroll whitespace-nowrap">
-              {[...Array(8)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="inline-flex items-center justify-center w-32 h-20 md:w-40 md:h-24 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[var(--color-orange)]/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 flex-shrink-0"
-                >
-                  <div className="relative w-full h-full flex items-center justify-center p-4">
-                    <div className="relative w-full h-full max-w-[120px] max-h-[60px] md:max-w-[150px] md:max-h-[80px]">
-                      <Image
-                        src={`/images/partenaire${(i % 5) + 1}.jpg`}
-                        alt={`Partenaire ${i + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100px, 150px"
-                        className="object-contain w-full h-full opacity-70 hover:opacity-100 transition-opacity"
-                        unoptimized
-                      />
-                    </div>
+                <blockquote className="text-[var(--color-ink-muted)] text-sm leading-relaxed flex-1 mb-6">
+                  &ldquo;{t.content}&rdquo;
+                </blockquote>
+                <footer className="flex items-center gap-3 pt-4 border-t border-[var(--color-border)]">
+                  <div className="relative h-10 w-10 overflow-hidden shrink-0">
+                    <Image src={t.image} alt={t.name} fill className="object-cover" sizes="40px" />
                   </div>
-                </div>
-              ))}
-              
-              {/* Duplicate for seamless loop */}
-              {[...Array(8)].map((_, i) => (
-                <div 
-                  key={`dup-${i}`}
-                  className="inline-flex items-center justify-center w-32 h-20 md:w-40 md:h-24 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[var(--color-orange)]/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 flex-shrink-0"
-                >
-                  <div className="relative w-full h-full flex items-center justify-center p-4">
-                    <div className="relative w-full h-full max-w-[120px] max-h-[60px] md:max-w-[150px] md:max-h-[80px]">
-                      <Image
-                        src={`/images/partenaire${(i % 5) + 1}.jpg`}
-                        alt={`Partenaire ${i + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100px, 150px"
-                        className="object-contain w-full h-full opacity-70 hover:opacity-100 transition-opacity"
-                        unoptimized
-                      />
-                    </div>
+                  <div>
+                    <p className="font-semibold text-sm">{t.name}</p>
+                    <p className="text-xs text-[var(--color-ink-muted)]">{t.role}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-            
-            <style jsx>{`
-              @keyframes scroll {
-                0% {
-                  transform: translateX(0);
-                }
-                100% {
-                  transform: translateX(calc(-250px * 4));
-                }
-              }
-              .animate-infinite-scroll {
-                animation: scroll 30s linear infinite;
-                display: inline-block;
-              }
-              .animate-infinite-scroll:hover {
-                animation-play-state: paused;
-              }
-              @media (min-width: 768px) {
-                @keyframes scroll {
-                  0% { transform: translateX(0); }
-                  100% { transform: translateX(calc(-320px * 4)); }
-                }
-              }
-            `}</style>
-          </div>
-          
-          <div className="text-center mt-6">
-            <p className="text-sm text-gray-500">Passez votre souris pour arrêter le défilement</p>
-          </div>
-        </div>
+                </footer>
+              </article>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );
-};
-
-export default Testimonials;
+}

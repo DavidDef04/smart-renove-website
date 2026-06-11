@@ -1,18 +1,20 @@
 import React from 'react';
 import { Lock, Shield, Home, Palette, Award, Thermometer } from 'lucide-react';
 import ServiceLayout from '../ServiceLayout';
+import { servicePageMetadata } from '@/app/lib/seo';
+import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
-export const metadata = {
-  title: 'Portes d\'Entrée Aluminium | Smart Renov',
-  description: 'Portes d\'entrée en aluminium haut de gamme alliant sécurité, isolation et design pour une première impression remarquable de votre habitation.',
-};
+export const metadata = servicePageMetadata('portes-entree');
 
 const PortesEntreePage = () => {
   return (
+    <>
+      <ServiceBreadcrumbLd serviceName="Portes d'entrée" slug="portes-entree" />
     <ServiceLayout
       title="Portes d'Entrée Aluminium"
       description="Nos portes d'entrée en aluminium allient sécurité renforcée, isolation optimale et design contemporain pour une première impression remarquable de votre habitation."
-      heroImage="/images/porte-entree-hero.jpg"
+      heroImage={SITE_IMAGES.gallery.menuiserie[1]}
       heroTitle="Portes d'Entrée Haut de Gamme"
       heroDescription="Sécurité, isolation et élégance pour l'entrée de votre maison"
       features={[
@@ -58,14 +60,7 @@ const PortesEntreePage = () => {
           "Contrôle qualité et mise en service"
         ]
       }}
-      gallery={[
-        "/images/securite.jpg",
-        "/images/veranda.jpg",
-        "/images/porte-entree-3.png",
-        "/images/porte-entree-4.png",
-        "/images/porte-entree-5.png",
-        "/images/porte-entree-6.png"
-      ]}
+      gallery={SITE_IMAGES.gallery.menuiserie.slice(0, 4)}
       faqs={[
         {
           question: "Quelle est la durée de vie d'une porte d'entrée en aluminium ?",
@@ -93,6 +88,7 @@ const PortesEntreePage = () => {
         }
       ]}
     />
+    </>
   );
 };
 

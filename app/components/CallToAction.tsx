@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SITE_IMAGES } from '../data/siteImages';
+import { SITE } from '../lib/site';
 
 export default function CallToAction() {
   return (
@@ -24,26 +26,23 @@ export default function CallToAction() {
             transition={{ duration: 0.6 }}
             className="text-center lg:text-left"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Besoin d'un Menuisier <span className="text-[var(--color-orange)]">Aluminium</span> ?
+            <h2 className="font-display text-white mb-6">
+              Un projet de <span className="gradient-text-warm">rénovation</span> ?
             </h2>
-            
-            <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto lg:mx-0">
-              Notre équipe d'experts est à votre disposition pour concrétiser vos projets de menuiserie aluminium.
-              Qualité, durabilité et esthétique au service de votre confort.
+
+            <p className="text-lead text-blue-100/95 mb-10 max-w-2xl mx-auto lg:mx-0">
+              Maison, appartement ou local commercial : nous coordonnons tous les corps de métier pour
+              livrer un chantier clé en main, dans les délais et selon votre budget.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link 
-                href="/contact" 
-                className="bg-[var(--color-orange)] hover:bg-opacity-90 text-white font-semibold py-4 px-8 rounded-full transition-all transform hover:scale-105 text-lg text-center"
+              <Link
+                href={SITE.routes.contact}
+                className="btn-primary text-base py-4 px-10"
               >
                 Demander un Devis
               </Link>
-              <Link 
-                href="/realisations" 
-                className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-semibold py-4 px-8 rounded-full transition-all transform hover:scale-105 text-lg text-center"
-              >
+              <Link href={SITE.routes.realisations} className="btn-outline-light text-base py-4 px-10">
                 Voir nos Réalisations
               </Link>
             </div>
@@ -58,8 +57,8 @@ export default function CallToAction() {
             className="relative h-80 md:h-96 lg:h-[500px]"
           >
             <Image
-              src="/images/besoinserrurier.jpg"
-              alt="Menuiserie Aluminium de qualité"
+              src={SITE_IMAGES.cta}
+              alt="Rénovation complète Smart Rénov"
               fill
               className="object-cover rounded-2xl shadow-2xl border-4 border-white/20"
               style={{ objectPosition: 'center' }}

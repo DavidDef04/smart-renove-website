@@ -22,7 +22,7 @@ const slides: Slide[] = [
     id: 1,
     videoUrl: '/videos/videoabout.mp4',
     title: 'Formations Professionnelles',
-    description: 'Découvrez nos formations expertes en menuiserie aluminium',
+    description: 'Formations professionnelles liées à la rénovation et aux métiers du bâtiment',
     buttonText: 'Découvrir',
     buttonLink: '/formations'
   },
