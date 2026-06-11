@@ -24,13 +24,17 @@ export const SITE_SEO = {
   ],
 } as const;
 
+import { COMPANY_MISSION, COMPANY_VISION } from '../data/companyIdentity';
+
 /** Coordonnées, routes et messages globaux du site */
 export const SITE_MESSAGING = {
   tagline: 'Rénovation complète clé en main',
+  mission: COMPANY_MISSION,
+  vision: COMPANY_VISION,
   shortDescription:
     'Rénovation de maisons et locaux au Cameroun : électricité, menuiserie aluminium, carrelage, peinture, plomberie et tous les corps de métier, avec un seul interlocuteur.',
   footerAbout:
-    'Votre partenaire rénovation clé en main à Douala : maison, appartement ou local commercial transformés de A à Z avec qualité, délais maîtrisés et suivi chantier.',
+    'Donner une nouvelle vie aux bâtiments à Douala — rénovations fiables, durables et de qualité, avec transparence et un seul interlocuteur.',
   servicesIntro:
     'Une offre complète pour rénover et équiper votre bien : rénovation globale, second œuvre, finitions et menuiserie aluminium sur mesure.',
 } as const;

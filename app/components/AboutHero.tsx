@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import PageHero from './ui/PageHero';
+import { COMPANY_MISSION } from '../data/companyIdentity';
 import { SITE_IMAGES } from '../data/siteImages';
 import { SITE } from '../lib/site';
 
@@ -17,7 +18,7 @@ export default function AboutHero() {
           L&apos;expertise <em>rénovation</em> au Cameroun
         </>
       }
-      description="Plus de 7 ans à transformer maisons et locaux commerciaux à Douala — rénovation clé en main, menuiserie aluminium et coordination de chantier."
+      description={`${COMPANY_MISSION} Plus de 7 ans à transformer maisons et locaux commerciaux à Douala.`}
     >
       <Link href={SITE.routes.contact} className="sr-btn sr-btn--primary">
         Demander un devis

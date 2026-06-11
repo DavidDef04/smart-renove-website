@@ -246,7 +246,8 @@ export function localBusinessJsonLd(): Record<string, unknown> {
     url: SITE_SEO.url,
     logo: `${SITE_SEO.url}/icon`,
     image: `${SITE_SEO.url}${DEFAULT_OG_IMAGE}`,
-    description: SITE_MESSAGING.shortDescription,
+    description: SITE_MESSAGING.mission,
+    slogan: SITE_MESSAGING.vision,
     telephone: SITE.phone,
     email: SITE.email,
     address: {

@@ -12,10 +12,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === '/';
-  const onDarkHero = isHome && !scrolled;
+  const onDarkHero = isHome && !scrolled && !isOpen;
+  const solidHeader = scrolled || !isHome || isOpen;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 48);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -44,16 +45,12 @@ export default function Navbar() {
     ? 'text-white/85 hover:text-white'
     : 'text-ink hover:text-[var(--color-accent)]';
 
+  const headerSurface = solidHeader
+    ? 'bg-white border-b border-[var(--color-border)] shadow-[0_4px_24px_rgb(6_8_15/0.08)] py-2 sm:py-3'
+    : 'bg-[var(--color-night)]/96 backdrop-blur-xl border-b border-white/10 py-3';
+
   return (
-    <header
-      className={`w-full transition-all duration-500 ${
-        onDarkHero
-          ? 'bg-transparent py-3'
-          : scrolled
-            ? 'glass-light shadow-lg py-2'
-            : 'bg-white/90 backdrop-blur-md py-3 border-b border-[var(--color-border)]'
-      }`}
-    >
+    <header className={`w-full transition-all duration-300 ${headerSurface}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Logo size="md" />
@@ -111,26 +108,26 @@ export default function Navbar() {
         </div>
 
         {isOpen && (
-          <nav className="lg:hidden mt-4 pb-4 space-y-1 border-t border-white/10 pt-4">
+          <nav className="lg:hidden mt-3 -mx-4 border-t border-[var(--color-border)] bg-white px-4 pb-5 pt-3 shadow-[inset_0_8px_16px_-12px_rgb(6_8_15/0.12)]">
             {navLinks.map((link) => (
               <div key={link.name}>
                 <Link
                   href={link.href}
-                  className={`flex items-center justify-between py-2.5 px-3 rounded-xl font-semibold ${
-                    link.isContact ? 'btn-primary text-center' : onDarkHero ? 'text-white' : 'text-ink'
+                  className={`flex items-center justify-between py-2.5 px-3 font-semibold ${
+                    link.isContact ? 'sr-btn sr-btn--primary !justify-center mt-2' : 'text-ink hover:text-[var(--color-accent)]'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                   {link.submenu ? (
-                    <ChevronDown className="h-4 w-4 shrink-0 opacity-60" aria-hidden />
+                    <ChevronDown className="h-4 w-4 shrink-0 text-[var(--color-ink-muted)]" aria-hidden />
                   ) : null}
                 </Link>
                 {link.submenu?.map((sub) => (
                   <Link
                     key={sub.name}
                     href={sub.href}
-                    className={`block py-2 pl-6 text-sm ${onDarkHero ? 'text-white/70 hover:text-white' : 'text-ink-muted hover:text-[var(--color-accent)]'}`}
+                    className="block py-2 pl-6 text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-accent)]"
                     onClick={() => setIsOpen(false)}
                   >
                     {sub.name}

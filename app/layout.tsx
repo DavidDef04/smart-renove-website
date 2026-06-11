@@ -41,7 +41,7 @@ export default function RootLayout({
     <html lang="fr-CM" className={`${fontDisplay.variable} ${fontBody.variable}`}>
       <body className="font-sans antialiased">
         <StructuredData data={[localBusinessJsonLd(), webSiteJsonLd()]} />
-        <header className="fixed top-0 left-0 right-0 z-50">
+        <header className="site-header fixed top-0 left-0 right-0 z-50">
           <TopBar />
           <Navbar />
         </header>

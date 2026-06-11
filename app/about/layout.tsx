@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
+import { COMPANY_MISSION } from '@/app/data/companyIdentity';
 import { buildPageMetadata } from '@/app/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'À propos — Entreprise de rénovation à Douala',
-  description:
-    'Découvrez Smart Rénov : équipe locale, rénovation clé en main et menuiserie aluminium à Douala. Expérience, qualité et suivi de chantier au Cameroun.',
+  description: `${COMPANY_MISSION} Découvrez notre vision, nos valeurs et notre équipe à Douala.`,
   path: '/about',
   keywords: ['entreprise rénovation Douala', 'qui sommes-nous Smart Rénov'],
 });

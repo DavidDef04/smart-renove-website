@@ -1,6 +1,7 @@
 import Hero from './components/Hero';
 import TrustMarquee from './components/TrustMarquee';
 import RenovationCompleteSection from './components/RenovationCompleteSection';
+import MissionVisionValues from './components/MissionVisionValues';
 import About from './components/About';
 import StatsSection from './components/StatsSection';
 import FormationsSection from './components/FormationsSection';
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <TrustMarquee />
       <RenovationCompleteSection />
+      <MissionVisionValues compact />
       <About />
       <StatsSection />
       <Services />

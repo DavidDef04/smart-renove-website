@@ -4,26 +4,16 @@ import { Phone, MessageCircle, Award, Shield, Clock, CheckCircle2 } from 'lucide
 import Image from 'next/image';
 import Link from 'next/link';
 import SectionHeader from './ui/SectionHeader';
+import { COMPANY_VALUES } from '../data/companyIdentity';
 import { SITE_IMAGES } from '../data/siteImages';
-import { SITE } from '../lib/site';
+import { SITE, SITE_MESSAGING } from '../lib/site';
 
-const strengths = [
-  {
-    icon: Award,
-    title: 'Expertise terrain',
-    description: 'Équipe pluridisciplinaire pour la rénovation complète et les finitions exigeantes.',
-  },
-  {
-    icon: Shield,
-    title: 'Chantier garanti',
-    description: 'Matériaux adaptés au climat tropical et suivi rigoureux de A à Z.',
-  },
-  {
-    icon: Clock,
-    title: 'Délais tenus',
-    description: 'Planning coordonné, un seul interlocuteur du devis à la livraison.',
-  },
-];
+const highlightIcons = [Award, Shield, Clock];
+const strengths = COMPANY_VALUES.filter((v) => [1, 2, 4].includes(v.id)).map((value, index) => ({
+  icon: highlightIcons[index] ?? Award,
+  title: value.title,
+  description: value.description,
+}));
 
 export default function About() {
   return (
@@ -40,7 +30,7 @@ export default function About() {
                   Rénovation <em>clé en main</em> à Douala
                 </>
               }
-              description="Plus de 7 ans d'expérience au service des particuliers et professionnels. Maison, appartement ou local commercial : nous coordonnons tous les corps de métier."
+              description={`${SITE_MESSAGING.mission} Plus de 7 ans d'expérience à Douala au service des particuliers et professionnels.`}
             />
 
             <div className="space-y-4 mb-8">
