@@ -4,7 +4,7 @@ import { SITE, SITE_MESSAGING } from '@/app/lib/site';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: SITE.name,
-    short_name: 'Smart Rénov',
+    short_name: 'Smart Renov',
     description: SITE_MESSAGING.shortDescription,
     start_url: '/',
     display: 'standalone',

@@ -44,7 +44,17 @@ export function buildPageMetadata({
     keywords: [...keywordSet],
     alternates: { canonical: canonicalPath },
     robots: index
-      ? { index: true, follow: true, googleBot: { index: true, follow: true } }
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+          },
+        }
       : { index: false, follow: true },
     openGraph: {
       type: 'website',
@@ -73,8 +83,20 @@ export function buildPageMetadata({
 
 /** Métadonnées par défaut du site (layout racine) */
 export function buildRootMetadata(): Metadata {
+  const verification: Metadata['verification'] = {};
+  if (SITE_SEO.googleSiteVerification) {
+    verification.google = SITE_SEO.googleSiteVerification;
+  }
+  if (SITE_SEO.bingSiteVerification) {
+    verification.other = {
+      ...(verification.other ?? {}),
+      'msvalidate.01': SITE_SEO.bingSiteVerification,
+    };
+  }
+
   return {
     metadataBase: new URL(SITE_SEO.url),
+    applicationName: SITE.name,
     title: {
       default: `${SITE.name} — Rénovation clé en main à Douala, Cameroun`,
       template: `%s | ${SITE.name}`,
@@ -85,7 +107,17 @@ export function buildRootMetadata(): Metadata {
     creator: SITE.name,
     publisher: SITE.name,
     category: 'construction',
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
+    },
     alternates: {
       canonical: '/',
       languages: { 'fr-CM': '/' },
@@ -105,10 +137,7 @@ export function buildRootMetadata(): Metadata {
       description: SITE_MESSAGING.shortDescription,
       images: [`${SITE_SEO.url}${DEFAULT_OG_IMAGE}`],
     },
-    // Favicon : app/icon.svg et app/apple-icon.svg (convention Next.js)
-    verification: SITE_SEO.googleSiteVerification
-      ? { google: SITE_SEO.googleSiteVerification }
-      : undefined,
+    verification: Object.keys(verification).length > 0 ? verification : undefined,
     other: {
       'geo.region': 'CM-LT',
       'geo.placename': 'Douala',
@@ -243,6 +272,7 @@ export function localBusinessJsonLd(): Record<string, unknown> {
     '@type': 'HomeAndConstructionBusiness',
     '@id': `${SITE_SEO.url}/#organization`,
     name: SITE.name,
+    alternateName: ['Smart Renov 237', 'Smart Rénov Cameroun', 'smartrenov237.com'],
     url: SITE_SEO.url,
     logo: `${SITE_SEO.url}/icon`,
     image: `${SITE_SEO.url}${DEFAULT_OG_IMAGE}`,
@@ -300,6 +330,23 @@ export function localBusinessJsonLd(): Record<string, unknown> {
   };
 }
 
+export function servicesItemListJsonLd(): Record<string, unknown> {
+  const servicePaths = SITEMAP_ROUTES.filter(
+    (r) => r.path.startsWith('/services/') || r.path === '/renovation-complete'
+  );
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Services Smart Rénov',
+    itemListElement: servicePaths.map((route, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: route.path.replace('/services/', '').replace(/-/g, ' ') || 'rénovation complète',
+      url: `${SITE_SEO.url}${route.path}`,
+    })),
+  };
+}
+
 export function webSiteJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
@@ -307,6 +354,7 @@ export function webSiteJsonLd(): Record<string, unknown> {
     '@id': `${SITE_SEO.url}/#website`,
     url: SITE_SEO.url,
     name: SITE.name,
+    alternateName: ['Smart Renov 237', 'smartrenov237.com'],
     description: SITE_MESSAGING.shortDescription,
     inLanguage: 'fr-CM',
     publisher: { '@id': `${SITE_SEO.url}/#organization` },

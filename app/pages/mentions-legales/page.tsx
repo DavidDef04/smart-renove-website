@@ -135,7 +135,7 @@ export default function MentionsLegales() {
                     <Mail className="w-5 h-5 text-[var(--color-orange)] mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium text-gray-900">Email</p>
-                      <p className="text-gray-600">contact@smartrenov.cm</p>
+                      <p className="text-gray-600">{SITE.email}</p>
                     </div>
                   </div>
                 </div>

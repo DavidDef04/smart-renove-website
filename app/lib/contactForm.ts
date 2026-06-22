@@ -1,4 +1,4 @@
-import { SITE } from './site';
+import { SITE, SITE_DOMAIN } from './site';
 
 /** Validation et construction du message WhatsApp pour le formulaire contact */
 
@@ -84,7 +84,7 @@ export function buildWhatsAppMessage(data: ContactFormPayload): string {
     lines.push(`Fichier à transmettre : ${data.fileName} (merci de l’envoyer en pièce jointe sur WhatsApp)`);
   }
 
-  lines.push('', 'Message :', data.message, '', '— Envoyé via srs.cm');
+  lines.push('', 'Message :', data.message, '', `— Envoyé via ${SITE_DOMAIN}`);
 
   return lines.join('\n');
 }

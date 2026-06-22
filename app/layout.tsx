@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import TopBar from './components/TopBar';
 import FloatingContact from './components/FloatingContact';
 import StructuredData from './components/StructuredData';
-import { buildRootMetadata, localBusinessJsonLd, webSiteJsonLd } from './lib/seo';
+import { buildRootMetadata, localBusinessJsonLd, servicesItemListJsonLd, webSiteJsonLd } from './lib/seo';
 
 const fontDisplay = Syne({
   subsets: ['latin'],
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="fr-CM" className={`${fontDisplay.variable} ${fontBody.variable}`}>
       <body className="font-sans antialiased">
-        <StructuredData data={[localBusinessJsonLd(), webSiteJsonLd()]} />
+        <StructuredData data={[localBusinessJsonLd(), webSiteJsonLd(), servicesItemListJsonLd()]} />
         <header className="site-header fixed top-0 left-0 right-0 z-50">
           <TopBar />
           <Navbar />

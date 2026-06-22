@@ -3,7 +3,7 @@ import { buildPageMetadata } from '@/app/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Conditions d\'utilisation',
-  description: 'Conditions générales d\'utilisation du site Smart Rénov (srs.cm) — rénovation et menuiserie à Douala.',
+  description: 'Conditions générales d\'utilisation du site Smart Rénov (smartrenov237.com) — rénovation et menuiserie à Douala.',
   path: '/pages/conditions-utilisation',
   index: true,
 });

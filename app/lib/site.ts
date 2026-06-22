@@ -1,26 +1,40 @@
+/** Domaine canonique du site */
+export const SITE_DOMAIN = 'smartrenov237.com';
+
 /** URL canonique du site (production) */
 export const SITE_SEO = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://srs.cm',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? `https://${SITE_DOMAIN}`,
   locale: 'fr_CM' as const,
   defaultKeywords: [
     'Smart Rénov',
+    'Smart Renov 237',
+    'smartrenov237',
+    'smartrenov237.com',
     'rénovation Douala',
     'rénovation Cameroun',
     'rénovation maison Douala',
     'rénovation clé en main',
-    'menuiserie aluminium Douala',
-    'travaux rénovation Douala',
+    'rénovation clé en main Douala',
+    'entreprise rénovation Douala',
     'entreprise rénovation Cameroun',
+    'travaux rénovation Douala',
     'devis rénovation Douala',
+    'devis rénovation Cameroun',
+    'menuiserie aluminium Douala',
+    'menuiserie aluminium Cameroun',
+    'second œuvre Douala',
+    'travaux bâtiment Douala',
+    'construction rénovation Cameroun',
   ],
   geo: {
     latitude: 4.0511,
     longitude: 9.7679,
   },
   googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  bingSiteVerification: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
   openingHours: [
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '18:00' },
-    { days: ['Saturday'], opens: '08:00', closes: '14:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '19:00' },
+    { days: ['Saturday'], opens: '09:00', closes: '17:00' },
   ],
 } as const;
 
@@ -32,7 +46,7 @@ export const SITE_MESSAGING = {
   mission: COMPANY_MISSION,
   vision: COMPANY_VISION,
   shortDescription:
-    'Rénovation de maisons et locaux au Cameroun : électricité, menuiserie aluminium, carrelage, peinture, plomberie et tous les corps de métier, avec un seul interlocuteur.',
+    'Smart Rénov — rénovation clé en main à Douala et au Cameroun : maison, appartement ou local commercial. Électricité, plomberie, carrelage, peinture, menuiserie aluminium. Devis gratuit.',
   footerAbout:
     'Donner une nouvelle vie aux bâtiments à Douala — rénovations fiables, durables et de qualité, avec transparence et un seul interlocuteur.',
   servicesIntro:
@@ -49,7 +63,7 @@ export const SITE_SOCIAL = {
 
 export const SITE = {
   name: 'Smart Rénov',
-  email: 'info@srs.cm',
+  email: 'contact@smartrenov237.com',
   phone: '+237687185953',
   phoneDisplay: '+237 6 87 18 59 53',
   phoneSecondary: '+237694522355',
