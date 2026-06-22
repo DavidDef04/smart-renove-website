@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env NEXT_DISABLE_TURBOPACK=1 next build",
+    "build": "node scripts/build.mjs",
     "start": "next start",
     "lint": "eslint"
   },
@@ -23,7 +23,6 @@
     "@types/node": "^20.19.24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "^16.2.1",
     "tailwindcss": "^4",
