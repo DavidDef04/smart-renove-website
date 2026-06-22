@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/build.mjs",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0",
     "lint": "eslint"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",
