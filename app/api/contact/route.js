@@ -1,4 +1,5 @@
 import { validateContactForm } from '@/app/lib/contactForm';
+import { sendContactEmail } from '@/app/lib/sendContactEmail';
 
 async function verifyTurnstile(token) {
   if (!token || typeof token !== 'string') {
@@ -64,11 +65,49 @@ export async function POST(req) {
       );
     }
 
-    // Plus d’envoi n8n : validation Turnstile + champs uniquement
+    let attachment = null;
+    const uploadedFile = formData.get('attachment');
+    if (uploadedFile && typeof uploadedFile === 'object' && 'arrayBuffer' in uploadedFile) {
+      const file = /** @type {File} */ (uploadedFile);
+      if (file.size > 0) {
+        if (file.size > 10 * 1024 * 1024) {
+          return Response.json(
+            { message: 'Le fichier est trop volumineux (max. 10 Mo).' },
+            { status: 400 }
+          );
+        }
+        const buffer = Buffer.from(await file.arrayBuffer());
+        attachment = {
+          filename: sanitized.fileName || file.name,
+          content: buffer,
+        };
+      }
+    }
+
+    try {
+      await sendContactEmail(sanitized, attachment);
+    } catch (emailError) {
+      const code = emailError instanceof Error ? emailError.message : 'EMAIL_SEND_FAILED';
+
+      if (code === 'EMAIL_NOT_CONFIGURED') {
+        return Response.json(
+          { message: 'Service temporairement indisponible. Contactez-nous par téléphone.' },
+          { status: 503 }
+        );
+      }
+
+      return Response.json(
+        {
+          message:
+            'Impossible d’envoyer votre message pour le moment. Réessayez ou appelez-nous directement.',
+        },
+        { status: 502 }
+      );
+    }
+
     return Response.json({
-      message: 'Validation réussie',
+      message: 'Demande envoyée avec succès',
       ok: true,
-      sanitized,
     });
   } catch (error) {
     console.error('Erreur API contact:', error);

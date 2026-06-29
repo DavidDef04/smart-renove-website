@@ -21,8 +21,8 @@ export default function RealisationsGallery() {
       <PageHero
         index="07"
         kicker="Portfolio"
-        image={SITE_IMAGES.realisations[3].image}
-        imageAlt="Chantier Smart Rénov"
+        image={SITE_IMAGES.realisations[0].image}
+        imageAlt="Pose carrelage Smart Rénov"
         title={
           <>
             Nos <em>réalisations</em>
@@ -65,12 +65,12 @@ export default function RealisationsGallery() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-100 transition-all duration-500 hover:-translate-y-1"
               >
-                <motion.div className="h-64 relative overflow-hidden">
+                <motion.div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-soft)]">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -86,7 +86,7 @@ export default function RealisationsGallery() {
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[var(--color-blue)] transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
                   <Link
                     href={SITE.routes.contact}
                     className="inline-flex items-center text-[var(--color-blue)] font-semibold hover:text-[var(--color-orange)] transition-colors"

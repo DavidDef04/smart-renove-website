@@ -81,7 +81,9 @@ export function buildWhatsAppMessage(data: ContactFormPayload): string {
   ];
 
   if (data.fileName) {
-    lines.push(`Fichier à transmettre : ${data.fileName} (merci de l’envoyer en pièce jointe sur WhatsApp)`);
+    lines.push(
+      `Pièce jointe : ${data.fileName} (merci de l’envoyer aussi en pièce jointe sur WhatsApp si besoin)`
+    );
   }
 
   lines.push('', 'Message :', data.message, '', `— Envoyé via ${SITE_DOMAIN}`);

@@ -9,15 +9,14 @@ import {
   Phone,
   Clock,
   Send,
-  CheckCircle,
   Upload,
   ChevronDown,
-  MessageCircle,
 } from 'lucide-react';
 import Footer from '@/app/components/Footer';
 import ConversionBand from '@/app/components/ConversionBand';
 import SocialLinks from '@/app/components/SocialLinks';
 import useContactForm from '@/app/components/ContactForm';
+import ContactSubmitModal from '@/app/components/ContactSubmitModal';
 import PageHero from '@/app/components/ui/PageHero';
 import SectionHeader from '@/app/components/ui/SectionHeader';
 import { SITE_IMAGES } from '@/app/data/siteImages';
@@ -83,7 +82,9 @@ function ContactPageContent() {
     isUrgent: false,
   });
   const [fileName, setFileName] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitModal, setSubmitModal] = useState<'loading' | 'success' | null>(null);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [error, setError] = useState('');
   const [formProgress, setFormProgress] = useState(0);
 
@@ -104,13 +105,28 @@ function ContactPageContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    if (!isSubmitted) return;
+    if (submitModal !== 'success') return;
     const timer = setTimeout(() => {
-      setIsSubmitted(false);
+      setSubmitModal(null);
+      setWhatsappUrl('');
       resetTurnstile();
-    }, 10000);
+    }, 12000);
     return () => clearTimeout(timer);
-  }, [isSubmitted, resetTurnstile]);
+  }, [submitModal, resetTurnstile]);
+
+  useEffect(() => {
+    if (submitModal !== 'loading') {
+      setLoadingProgress(0);
+      return;
+    }
+
+    setLoadingProgress(8);
+    const interval = window.setInterval(() => {
+      setLoadingProgress((prev) => (prev >= 92 ? prev : prev + Math.random() * 12 + 4));
+    }, 350);
+
+    return () => window.clearInterval(interval);
+  }, [submitModal]);
 
   const calculateProgress = useCallback(() => {
     const fields = [
@@ -171,18 +187,26 @@ function ContactPageContent() {
       return;
     }
 
+    setSubmitModal('loading');
+
     try {
-      await submitForm({ ...formData, fileName: fileName || null });
-      setIsSubmitted(true);
-      resetTurnstile();
-      setTimeout(() => {
-        resetForm();
-        setIsSubmitted(false);
-      }, 5000);
+      const result = await submitForm({ ...formData, fileName: fileName || null });
+      setLoadingProgress(100);
+      setWhatsappUrl(result.whatsappUrl);
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      setSubmitModal('success');
+      resetForm();
     } catch (err) {
+      setSubmitModal(null);
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');
       resetTurnstile();
     }
+  };
+
+  const closeSuccessModal = () => {
+    setSubmitModal(null);
+    setWhatsappUrl('');
+    resetTurnstile();
   };
 
   return (
@@ -229,7 +253,7 @@ function ContactPageContent() {
                     Écrivez-<em>nous</em>
                   </>
                 }
-                description="Remplissez le formulaire ci-dessous. Votre message s'ouvrira dans WhatsApp pour un envoi rapide."
+                description="Remplissez le formulaire ci-dessous. Votre demande sera envoyée à notre équipe par e-mail, puis vous pourrez la confirmer sur WhatsApp."
                 align="left"
                 className="mb-8 !max-w-none"
               />
@@ -412,15 +436,15 @@ function ContactPageContent() {
 
                     <button
                       type="submit"
-                      disabled={isSubmitting || !isTurnstileValid}
+                      disabled={isSubmitting || !isTurnstileValid || submitModal === 'loading'}
                       className="sr-btn sr-btn--primary w-full disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {isSubmitting ? (
+                      {isSubmitting || submitModal === 'loading' ? (
                         'Envoi en cours…'
                       ) : (
                         <>
-                          <MessageCircle className="h-5 w-5" />
-                          Envoyer sur WhatsApp
+                          <Send className="h-5 w-5" />
+                          Envoyer ma demande
                         </>
                       )}
                     </button>
@@ -589,59 +613,12 @@ function ContactPageContent() {
       <ConversionBand />
       <Footer />
 
-      {isSubmitted ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-night)]/80 p-4 backdrop-blur-sm"
-          onClick={() => {
-            setIsSubmitted(false);
-            resetTurnstile();
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="contact-success-title"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="sr-card max-w-md w-full p-8 text-center shadow-[8px_8px_0_var(--color-night)]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center bg-[var(--color-accent)] text-white">
-              <CheckCircle className="h-7 w-7" />
-            </div>
-            <h3 id="contact-success-title" className="sr-heading text-2xl">
-              WhatsApp ouvert
-            </h3>
-            <p className="sr-lead mt-3 text-left !text-[var(--color-ink-muted)]">
-              Votre message est prêt dans WhatsApp. Appuyez sur <strong>Envoyer</strong> pour nous le
-              transmettre — nous vous répondrons rapidement.
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sr-btn sr-btn--primary flex-1"
-              >
-                Rouvrir WhatsApp
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsSubmitted(false);
-                  resetForm();
-                }}
-                className="sr-btn sr-btn--ghost flex-1"
-              >
-                Nouveau message
-              </button>
-            </div>
-            <p className="mt-4 text-xs text-[var(--color-ink-muted)]">
-              Fermeture automatique dans 10 secondes
-            </p>
-          </motion.div>
-        </div>
-      ) : null}
+      <ContactSubmitModal
+        mode={submitModal}
+        loadingProgress={loadingProgress}
+        whatsappUrl={whatsappUrl}
+        onClose={closeSuccessModal}
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('agencements');
 
@@ -57,12 +58,7 @@ export default function AgencementsPage() {
           "5. Installation - Mise en place par nos équipes qualifiées."
         ]
       }}
-      gallery={[
-        SITE_IMAGES.services.agencement,
-        SITE_IMAGES.gallery.menuiserie[5],
-        SITE_IMAGES.gallery.menuiserie[3],
-        SITE_IMAGES.about.bureau,
-      ]}
+      gallery={getServiceGallery('agencements')}
       faqs={[
         {
           question: "Quels types d'agencements intérieurs proposez-vous ?",

@@ -2,6 +2,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('facades-vitrees');
 
@@ -58,7 +59,7 @@ export default function FacadesVitreesPage() {
           "6. Service après-vente - Suivi et entretien pour une durabilité optimale."
         ]
       }}
-      gallery={[...SITE_IMAGES.gallery.facade]}
+      gallery={getServiceGallery('facades-vitrees')}
       faqs={[
         {
           question: "Quels sont les avantages d'une façade vitrée en aluminium ?",

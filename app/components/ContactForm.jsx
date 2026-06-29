@@ -43,6 +43,9 @@ const useContactForm = () => {
         if (sanitized.fileName) {
           data.append('fileName', sanitized.fileName);
         }
+        if (formData.file instanceof File && formData.file.size > 0) {
+          data.append('attachment', formData.file);
+        }
         const honeypotEl = document.querySelector('input[name="website"]');
         const honeypot = honeypotEl?.value ?? '';
         data.append('website', honeypot);
@@ -63,8 +66,6 @@ const useContactForm = () => {
         }
 
         const whatsappUrl = buildWhatsAppUrl(sanitized);
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-
         return { ok: true, whatsappUrl };
       } finally {
         setIsSubmitting(false);

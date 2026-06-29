@@ -24,7 +24,7 @@ import { getServiceHref } from '../lib/serviceRoutes';
 import { SITE_IMAGES } from '../data/siteImages';
 import { SITE_MESSAGING } from '../lib/site';
 
-const { services: svc, gallery } = SITE_IMAGES;
+const { services: svc } = SITE_IMAGES;
 
 const services = [
   {
@@ -51,7 +51,7 @@ const services = [
     description:
       'Créations uniques adaptées à votre bien — de la conception à la pose par nos équipes.',
     icon: Ruler,
-    image: gallery.menuiserie[0],
+    image: svc.surMesure,
     slug: 'sur-mesure',
   },
   {
@@ -60,7 +60,7 @@ const services = [
     description:
       'Vitrines, façades et aménagements pour locaux professionnels — image de marque soignée.',
     icon: Building2,
-    image: SITE_IMAGES.hero.slide2,
+    image: svc.projetsCommerciaux,
     slug: 'projets-commerciaux',
   },
   {
@@ -87,7 +87,7 @@ const services = [
     description:
       'Menuiseries aluminium vitrées fournies et posées par nos équipes qualifiées.',
     icon: Hammer,
-    image: gallery.menuiserie[1],
+    image: svc.fourniturePose,
     slug: 'fourniture-pose',
   },
   {
@@ -96,7 +96,7 @@ const services = [
     description:
       'Dépannage, changement de serrures et blindage — sécurité adaptée à chaque ouverture.',
     icon: Key,
-    image: gallery.menuiserie[2],
+    image: svc.serrurerie,
     slug: 'serrurerie',
   },
   {
@@ -173,7 +173,7 @@ export default function ServicesPage() {
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="object-cover"
+                      className="object-cover object-center"
                       sizes="(max-width: 768px) 100vw, 33vw"
                       priority={service.id <= 3}
                     />

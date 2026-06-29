@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import ServiceLayout from '../ServiceLayout';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
+import { SITE_IMAGES } from '@/app/data/siteImages';
 
 export const metadata: Metadata = {
   title: 'Isolation Thermique des Menuiseries | Smart Renov',
@@ -12,7 +14,7 @@ export default function IsolationThermiquePage() {
     <ServiceLayout
       title="ISOLATION THERMIQUE HAUTE PERFORMANCE"
       description="Nos solutions d'isolation thermique pour menuiseries en aluminium vous permettent de réaliser d'importantes économies d'énergie tout en améliorant votre confort thermique. Nous vous proposons des solutions adaptées à vos besoins, que ce soit pour une construction neuve ou une rénovation."
-      heroImage="/images/isolation-thermique-hero.jpg"
+      heroImage="/images/fenetre-coulissante-alu-anthracite-moustiquaire.jpg"
       heroTitle="ÉCONOMISEZ L'ÉNERGIE, PRÉSERVEZ LE CONFORT"
       heroDescription="Des solutions d'isolation thermique performantes pour un habitat plus économe et plus confortable."
       features={[
@@ -57,12 +59,7 @@ export default function IsolationThermiquePage() {
           "5. Suivi - Contrôle et conseils pour optimiser les performances."
         ]
       }}
-      gallery={[
-        "/images/isolation-1.jpg",
-        "/images/isolation-2.jpg",
-        "/images/isolation-3.jpg",
-        "/images/isolation-4.jpg"
-      ]}
+      gallery={getServiceGallery('isolation-thermique')}
       faqs={[
         {
           question: "Quels sont les signes d'une mauvaise isolation thermique ?",

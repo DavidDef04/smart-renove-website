@@ -4,6 +4,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('menuiserie-aluminium');
 
@@ -60,7 +61,7 @@ const MenuiserieAluminiumPage = () => {
           "Réception des travaux et garantie"
         ]
       }}
-      gallery={[...SITE_IMAGES.gallery.menuiserie]}
+      gallery={getServiceGallery('menuiserie-aluminium')}
       faqs={[
         {
           question: "Quelle est la durée de vie des menuiseries en aluminium ?",

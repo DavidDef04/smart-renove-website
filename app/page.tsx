@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <TrustMarquee />
       <RenovationCompleteSection />
-      <MissionVisionValues compact />
+      <MissionVisionValues />
       <About />
       <StatsSection />
       <Services />

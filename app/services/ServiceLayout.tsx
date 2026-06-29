@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ import { ChevronRight, Check, ArrowRight, Phone, Mail, MapPin, Clock, Shield, Mo
 import Footer from '../components/Footer';
 import PageHero from '../components/ui/PageHero';
 import { SITE } from '../lib/site';
+import { dedupeServiceGallery, type ServiceGalleryItem } from '../data/serviceGalleries';
 
 // Animation variants
 const fadeInUp = {
@@ -95,7 +96,7 @@ interface ServiceLayoutProps {
   heroDescription: string;
   features: Feature[];
   process: Process;
-  gallery: string[];
+  gallery: ServiceGalleryItem[];
   faqs: FAQ[];
 }
 
@@ -110,6 +111,11 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
   gallery,
   faqs,
 }) => {
+  const displayGallery = useMemo(
+    () => dedupeServiceGallery(gallery, [heroImage]),
+    [gallery, heroImage],
+  );
+
   return (
     <div className="min-h-screen bg-[var(--color-surface-soft)]">
       <PageHero
@@ -217,7 +223,7 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent -mb-24"></div>
       </motion.section>
       {/* Galerie d'images - Nos Réalisations */}
-      {gallery && gallery.length > 0 && (
+      {displayGallery.length > 0 && (
         <motion.section 
           initial="hidden"
           whileInView="visible"
@@ -243,51 +249,34 @@ const ServiceLayout: React.FC<ServiceLayoutProps> = ({
               </h2>
               <div className="w-24 h-1.5 bg-gradient-to-r from-yellow-200 to-orange-200 mx-auto my-6 rounded-full"></div>
               <p className="text-xl text-gray-600">
-                Découvrez nos projets récents et laissez-vous inspirer par notre savoir-faire en rénovation
+                Exemples de réalisations Smart Rénov pour ce service
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {gallery.map((image, index) => (
-                <motion.div 
-                  key={index}
+              {displayGallery.map((item, index) => (
+                <motion.article
+                  key={`${item.image}-${index}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg"
                 >
-                  <div className="aspect-w-16 aspect-h-10 w-full overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-surface-soft)]">
                     <Image
-                      src={image}
-                      alt={`Projet ${index + 1}`}
-                      width={600}
-                      height={400}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-xl font-bold text-white mb-2">Projet {index + 1}</h3>
-                        <p className="text-blue-100 mb-4">Rénovation Smart Rénov</p>
-                        <button className="inline-flex items-center px-5 py-2.5 bg-white text-[var(--color-blue)] rounded-full font-medium hover:bg-gray-100 transition-colors">
-                          Voir plus
-                          <MoveRight className="ml-2 h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">Projet {index + 1}</h3>
-                        <p className="text-gray-500">Projet rénovation</p>
-                      </div>
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-[var(--color-blue)]">
-                        {index + 1}
-                      </span>
-                    </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-gray-600">{item.description}</p>
                   </div>
-                </motion.div>
+                </motion.article>
               ))}
             </div>
 

@@ -38,18 +38,27 @@ export default function PageHero({
               src={image}
               alt={imageAlt}
               fill
-              className="object-cover"
+              className="object-contain object-center"
               priority
               sizes="100vw"
             />
-            <div
-              className="absolute inset-0 bg-gradient-to-r from-[#06080f]/92 via-[#06080f]/70 to-[#06080f]/45"
-              aria-hidden
-            />
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-[#06080f] via-[#06080f]/20 to-transparent"
-              aria-hidden
-            />
+            {centered ? (
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-[#06080f]/80 via-[#06080f]/35 to-[#06080f]/55"
+                aria-hidden
+              />
+            ) : (
+              <>
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#06080f]/95 via-[#06080f]/70 to-transparent lg:via-[#06080f]/35"
+                  aria-hidden
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-[#06080f]/60 via-transparent to-transparent"
+                  aria-hidden
+                />
+              </>
+            )}
           </>
         ) : (
           <div className="absolute inset-0 mesh-dark noise-overlay" aria-hidden />
@@ -61,6 +70,7 @@ export default function PageHero({
           <div
             className={`container mx-auto w-full ${centered ? 'text-center' : 'text-left'}`}
           >
+            <div className={centered ? '' : 'max-w-2xl lg:max-w-3xl'}>
             {(index || kicker) && (
               <motion.div
                 className={`sr-header__meta mb-4 ${centered ? 'justify-center' : ''}`}
@@ -111,6 +121,7 @@ export default function PageHero({
                 {children}
               </motion.div>
             ) : null}
+            </div>
           </div>
         </div>
       </div>

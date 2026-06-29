@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import FormationCard from './FormationCard';
 import SectionHeader from './ui/SectionHeader';
 import { FORMATIONS } from '../data/formationsData';
@@ -32,12 +31,6 @@ export default function FormationsSection() {
               imageUrl={formation.imageUrl}
             />
           ))}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Link href="/formations" className="sr-btn sr-btn--primary">
-            Programme complet
-          </Link>
         </div>
       </div>
     </section>

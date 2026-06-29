@@ -4,6 +4,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('portes-entree');
 
@@ -14,7 +15,7 @@ const PortesEntreePage = () => {
     <ServiceLayout
       title="Portes d'Entrée Aluminium"
       description="Nos portes d'entrée en aluminium allient sécurité renforcée, isolation optimale et design contemporain pour une première impression remarquable de votre habitation."
-      heroImage={SITE_IMAGES.gallery.menuiserie[1]}
+      heroImage={SITE_IMAGES.services.serrurerie}
       heroTitle="Portes d'Entrée Haut de Gamme"
       heroDescription="Sécurité, isolation et élégance pour l'entrée de votre maison"
       features={[
@@ -60,7 +61,7 @@ const PortesEntreePage = () => {
           "Contrôle qualité et mise en service"
         ]
       }}
-      gallery={SITE_IMAGES.gallery.menuiserie.slice(0, 4)}
+      gallery={getServiceGallery('portes-entree')}
       faqs={[
         {
           question: "Quelle est la durée de vie d'une porte d'entrée en aluminium ?",

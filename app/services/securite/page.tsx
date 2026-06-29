@@ -2,6 +2,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('securite');
 
@@ -57,12 +58,7 @@ export default function SecuritePage() {
           "5. Formation et suivi - Explication du fonctionnement et service après-vente."
         ]
       }}
-      gallery={[
-        SITE_IMAGES.services.securite,
-        SITE_IMAGES.gallery.menuiserie[1],
-        SITE_IMAGES.gallery.menuiserie[2],
-        SITE_IMAGES.gallery.menuiserie[0],
-      ]}
+      gallery={getServiceGallery('securite')}
       faqs={[
         {
           question: "Qu'est-ce que la certification A2P et pourquoi est-elle importante ?",

@@ -2,6 +2,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('maintenance');
 
@@ -57,12 +58,7 @@ export default function MaintenancePage() {
           "5. Suivi - Compte-rendu d'intervention et conseils d'utilisation."
         ]
       }}
-      gallery={[
-        SITE_IMAGES.about.secondary,
-        SITE_IMAGES.gallery.menuiserie[0],
-        SITE_IMAGES.about.chantier,
-        SITE_IMAGES.formations.equipe,
-      ]}
+      gallery={getServiceGallery('maintenance')}
       faqs={[
         {
           question: "Quand faire appel à un service de maintenance pour mes menuiseries ?",

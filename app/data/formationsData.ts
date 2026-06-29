@@ -13,7 +13,7 @@ export const FORMATIONS: FormationItem[] = [
     id: 1,
     title: 'Pose de menuiserie aluminium',
     description:
-      'Prise de mesures, découpe et pose de fenêtres, portes et baies coulissantes — compétence très recherchée sur les chantiers à Douala et dans les grandes villes.',
+      'Formation pratique à la pose de fenêtres, portes et baies aluminium. Vous serez opérationnel sur les chantiers résidentiels et commerciaux.',
     duration: '10 Mois',
     imageUrl: SITE_IMAGES.formations.menuiserie,
   },
@@ -21,7 +21,7 @@ export const FORMATIONS: FormationItem[] = [
     id: 2,
     title: 'Carrelage & revêtements de sol',
     description:
-      'Pose, ragréage et finitions pour salles de bain, cuisines et sols intérieurs — un métier indispensable sur le marché camerounais.',
+      'Formation à la pose de carrelage et revêtements de sol. Vous maîtriserez salles de bain, cuisines et finitions intérieures.',
     duration: '8 Mois',
     imageUrl: SITE_IMAGES.formations.carrelage,
   },
@@ -29,16 +29,16 @@ export const FORMATIONS: FormationItem[] = [
     id: 3,
     title: 'Électricité du bâtiment',
     description:
-      'Tableaux, câblage, éclairage et mise en sécurité pour logements et locaux commerciaux — base de toute rénovation sérieuse.',
+      'Formation aux installations électriques : tableaux, câblage et mise en sécurité. Base indispensable pour intervenir sur tout chantier.',
     duration: '12 Mois',
-    imageUrl: SITE_IMAGES.formations.supervision,
+    imageUrl: SITE_IMAGES.formations.electricite,
   },
   {
     id: 4,
     title: 'Peinture & finitions intérieures',
     description:
-      'Préparation des supports, enduits et peintures adaptées au climat tropical pour des finitions durables et professionnelles.',
+      'Formation peinture et finitions : préparation des supports et application adaptée au climat tropical pour un rendu durable.',
     duration: '10 Mois',
-    imageUrl: SITE_IMAGES.services.peinture,
+    imageUrl: SITE_IMAGES.formations.peinture,
   },
 ];

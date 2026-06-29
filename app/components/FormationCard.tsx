@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { SITE } from '../lib/site';
 
 interface FormationCardProps {
   id: number;
@@ -11,6 +11,11 @@ interface FormationCardProps {
   duration: string;
   imageUrl: string;
   className?: string;
+}
+
+function formationWhatsAppUrl(title: string) {
+  const message = `Bonjour Smart Rénov, je souhaite des informations sur la formation : ${title}.`;
+  return `${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
 export default function FormationCard({
@@ -33,26 +38,30 @@ export default function FormationCard({
           src={imageUrl}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover object-center"
           sizes="(max-width: 768px) 100vw, 25vw"
         />
       </div>
-      <div className="sr-card__body flex flex-col flex-1">
+      <div className="sr-card__body flex flex-col flex-1 text-[var(--color-ink)]">
         <div className="flex items-baseline justify-between gap-2 mb-2">
           <span className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--color-blue)]">
             Formation
           </span>
-          <span className="text-xs text-[var(--color-ink-muted)]">{duration}</span>
+          <span className="text-xs font-medium text-[var(--color-ink-muted)]">{duration}</span>
         </div>
         <h3 className="sr-card__title">{title}</h3>
-        <p className="text-sm text-[var(--color-ink-muted)] mb-5 flex-1 line-clamp-3">{description}</p>
-        <Link
-          href={`/contact?subject=${encodeURIComponent(`Formation: ${title}`)}`}
-          className="sr-link"
+        <p className="text-sm leading-relaxed text-[var(--color-ink-muted)] mb-5 flex-1">
+          {description}
+        </p>
+        <a
+          href={formationWhatsAppUrl(title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sr-link text-[var(--color-blue)] hover:text-[var(--color-accent)]"
         >
-          Programme
+          Nous contacter
           <span aria-hidden>→</span>
-        </Link>
+        </a>
       </div>
     </motion.article>
   );

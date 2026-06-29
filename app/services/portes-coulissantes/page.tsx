@@ -2,6 +2,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('portes-coulissantes');
 
@@ -12,7 +13,7 @@ export default function PortesCoulissantesPage() {
     <ServiceLayout
       title="PORTES COULISSANTES SUR MESURE"
       description="Nos portes coulissantes en aluminium allient esthétique contemporaine et fonctionnalité. Parfaites pour les espaces restreints ou pour créer une séparation élégante entre les pièces, elles s'intègrent parfaitement à tous les styles d'intérieur."
-      heroImage={SITE_IMAGES.gallery.menuiserie[3]}
+      heroImage={SITE_IMAGES.services.baies}
       heroTitle="PORTES COULISSANTES ÉLÉGANTES"
       heroDescription="Gagnez de l'espace avec nos portes coulissantes design et fonctionnelles, adaptées à tous vos projets d'aménagement."
       features={[
@@ -57,7 +58,7 @@ export default function PortesCoulissantesPage() {
           "5. Réception - Vérification et mise en service de votre installation."
         ]
       }}
-      gallery={SITE_IMAGES.gallery.menuiserie.slice(2, 6)}
+      gallery={getServiceGallery('portes-coulissantes')}
       faqs={[
         {
           question: "Quels sont les avantages des portes coulissantes par rapport aux portes classiques ?",

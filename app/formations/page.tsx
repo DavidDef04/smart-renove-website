@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import FormationCard from '../components/FormationCard';
 import Footer from '../components/Footer';
 import PageHero from '../components/ui/PageHero';
@@ -36,6 +35,10 @@ const TESTIMONIALS = [
   },
 ];
 
+const FORMATIONS_WHATSAPP_URL = `${SITE.whatsapp}?text=${encodeURIComponent(
+  'Bonjour Smart Rénov, je souhaite des informations sur vos formations professionnelles.',
+)}`;
+
 export default function FormationsPage() {
   return (
     <motion.div
@@ -53,18 +56,30 @@ export default function FormationsPage() {
             4 formations <em>professionnelles</em>
           </>
         }
-        description="Les métiers les plus recherchés sur les chantiers : pratique terrain, cas réels et suivi personnalisé."
+        description="Formations pratiques aux métiers du bâtiment — résumé sur le site, détails et inscription en conversation avec notre équipe."
         align="left"
       >
-        <a href="#formations" className="sr-btn sr-btn--primary">
-          Voir le programme
+        <a href="#formations" className="sr-btn sr-btn--ghost-light">
+          Nos formations
         </a>
-        <Link href={SITE.routes.contact} className="sr-btn sr-btn--ghost-light">
-          S&apos;inscrire
-        </Link>
+        <a
+          href={FORMATIONS_WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sr-btn sr-btn--primary"
+        >
+          Nous contacter
+        </a>
       </PageHero>
 
       <main className="container mx-auto px-4 pb-8">
+        <div className="max-w-3xl mx-auto text-center mb-12 pt-4">
+          <p className="text-[var(--color-ink-muted)] leading-relaxed">
+            Chaque formation est présentée en bref ci-dessous. Pour le programme détaillé, les
+            dates et l&apos;inscription, contactez-nous directement sur WhatsApp.
+          </p>
+        </div>
+
         <motion.div
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
           id="formations"
@@ -127,26 +142,19 @@ export default function FormationsPage() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Prêt à vous former ?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Une question sur nos formations ?</h2>
           <p className="text-blue-100 mb-8 max-w-xl mx-auto">
-            Places limitées par session. Contactez-nous pour les prochaines dates à Douala.
+            Places limitées par session. Écrivez-nous sur WhatsApp pour connaître les prochaines
+            dates à Douala et le détail de chaque programme.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href={SITE.routes.contact}
-              className="px-8 py-3 bg-white text-blue-700 font-semibold rounded-full hover:bg-blue-50 transition-colors"
-            >
-              S&apos;inscrire
-            </Link>
-            <a
-              href={SITE.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 border border-white/40 rounded-full hover:bg-white/10 transition-colors"
-            >
-              WhatsApp
-            </a>
-          </div>
+          <a
+            href={FORMATIONS_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex px-8 py-3 bg-white text-blue-700 font-semibold rounded-full hover:bg-blue-50 transition-colors"
+          >
+            Nous contacter
+          </a>
         </motion.div>
 
       </main>

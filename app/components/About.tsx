@@ -85,7 +85,7 @@ export default function About() {
             <div className="col-span-6 sm:col-span-4 relative aspect-square overflow-hidden border border-[var(--color-border)]">
               <Image
                 src={SITE_IMAGES.about.secondary}
-                alt="Atelier menuiserie aluminium"
+                alt="Artisan Smart Rénov au niveau laser infrarouge sur chantier"
                 fill
                 className="object-cover"
                 sizes="25vw"
@@ -93,8 +93,8 @@ export default function About() {
             </div>
             <div className="col-span-6 sm:col-span-4 relative aspect-square overflow-hidden border border-[var(--color-border)]">
               <Image
-                src={SITE_IMAGES.equipe}
-                alt="Équipe Smart Rénov"
+                src={SITE_IMAGES.about.equipe}
+                alt="Équipe Smart Rénov en pose de menuiserie aluminium"
                 fill
                 className="object-cover"
                 sizes="25vw"
@@ -109,10 +109,6 @@ export default function About() {
                 sizes="25vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-night)]/70 to-transparent" />
-              <p className="absolute bottom-3 left-3 right-3 text-white text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[var(--color-accent)]" />
-                Chantier livré clé en main
-              </p>
             </div>
           </div>
         </div>

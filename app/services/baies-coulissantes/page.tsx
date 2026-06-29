@@ -4,6 +4,7 @@ import ServiceLayout from '../ServiceLayout';
 import { servicePageMetadata } from '@/app/lib/seo';
 import { ServiceBreadcrumbLd } from '@/app/components/seo/ServiceBreadcrumbLd';
 import { SITE_IMAGES } from '@/app/data/siteImages';
+import { getServiceGallery } from '@/app/data/serviceGalleries';
 
 export const metadata = servicePageMetadata('baies-coulissantes');
 
@@ -60,7 +61,7 @@ const BaiesCoulissantesPage = () => {
           "Contrôle qualité et mise en service"
         ]
       }}
-      gallery={[...SITE_IMAGES.gallery.menuiserie]}
+      gallery={getServiceGallery('baies-coulissantes')}
       faqs={[
         {
           question: "Quelle est la durée de vie d'une baie coulissante ?",

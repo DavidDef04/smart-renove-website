@@ -22,7 +22,7 @@ const slides = [
     description:
       "Rénovation complète à Douala : un seul interlocuteur pour l'électricité, la plomberie, le carrelage, la peinture et la menuiserie.",
     image: SITE_IMAGES.hero.slide1,
-    imageAlt: 'Rénovation complète de maison à Douala — Smart Rénov Cameroun',
+    imageAlt: 'Rénovation complète avant/après — salon transformé à Douala par Smart Rénov',
     cta: '/renovation-complete',
   },
   {
@@ -67,17 +67,24 @@ export default function Hero() {
         >
           {slides.map((s) => (
             <SwiperSlide key={s.id}>
-              <div className="relative h-[100svh] w-full">
+              <div className="relative h-[100svh] w-full bg-[var(--color-night)]">
                 <Image
                   src={s.image}
                   alt={s.imageAlt}
                   fill
-                  className="object-cover"
+                  className="object-contain object-center"
                   priority={s.id === 0}
                   sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#06080f]/92 via-[#06080f]/70 to-[#06080f]/45" aria-hidden />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#06080f] via-[#06080f]/20 to-transparent" aria-hidden />
+                {/* Dégradé surtout à gauche (texte) — la photo reste entièrement visible à droite */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-[#06080f]/95 via-[#06080f]/70 to-transparent lg:via-[#06080f]/35"
+                  aria-hidden
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-[#06080f]/60 via-transparent to-transparent"
+                  aria-hidden
+                />
               </div>
             </SwiperSlide>
           ))}
