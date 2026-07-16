@@ -25,8 +25,8 @@ const PortesEntreePage = () => {
           icon: <Lock className="h-6 w-6 text-white" />
         },
         {
-          title: "Isolation Thermique",
-          description: "Performances thermiques exceptionnelles grâce à une isolation renforcée et une étanchéité optimale aux intempéries.",
+          title: "Isolation sonore",
+          description: "Performances acoustiques renforcées grâce à une isolation soignée et une étanchéité optimale des ouvrants.",
           icon: <Thermometer className="h-6 w-6 text-white" />
         },
         {

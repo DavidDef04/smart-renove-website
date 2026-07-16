@@ -117,6 +117,24 @@ const services = [
     image: svc.maintenance,
     slug: 'maintenance',
   },
+  {
+    id: 12,
+    title: 'Isolation sonore',
+    description:
+      'Menuiseries et cloisons pour atténuer le bruit extérieur et gagner en confort acoustique.',
+    icon: ShieldCheck,
+    image: svc.menuiserie,
+    slug: 'isolation-sonore',
+  },
+  {
+    id: 13,
+    title: 'Percolat',
+    description:
+      'Structures aluminium pour terrasses et balcons — ombre, protection et design moderne.',
+    icon: Home,
+    image: SITE_IMAGES.gallery.menuiserie[4],
+    slug: 'percolat',
+  },
 ];
 
 export default function ServicesPage() {

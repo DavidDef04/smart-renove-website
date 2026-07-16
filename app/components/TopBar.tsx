@@ -8,7 +8,7 @@ export default function TopBar() {
           <p className="truncate text-xs tracking-wide text-white/50">
             Rénovation clé en main · <span className="text-[var(--color-accent)]">Douala</span>
           </p>
-          <SocialLinks variant="light" size={14} showYoutube={false} />
+          <SocialLinks variant="light" size={14} />
         </div>
       </div>
     </div>

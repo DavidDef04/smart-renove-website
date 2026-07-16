@@ -25,7 +25,7 @@ export const RENOVATION_TRADES: RenovationTrade[] = [
     description:
       'Fenêtres, portes, baies coulissantes, façades vitrées et vérandas sur mesure.',
     icon: Wrench,
-    highlights: ['Pose & fabrication', 'Isolation thermique', 'Sécurité renforcée'],
+    highlights: ['Pose & fabrication', 'Isolation sonore', 'Sécurité renforcée'],
   },
   {
     id: 'electricite',

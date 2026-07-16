@@ -39,7 +39,7 @@ const FAQ_ITEMS = [
   {
     question: "Quels sont vos horaires d'ouverture ?",
     answer:
-      'Nos bureaux sont ouverts du lundi au vendredi de 8h à 19h et le samedi de 9h à 17h. Notre équipe est également disponible en dehors de ces horaires sur rendez-vous.',
+      'Nos bureaux sont ouverts du lundi au vendredi de 8h à 17h30 et le samedi de 8h à 13h30. Notre équipe est également disponible en dehors de ces horaires sur rendez-vous.',
   },
   {
     question: 'Quel est le délai de réponse à une demande de contact ?',
@@ -58,7 +58,7 @@ const FAQ_ITEMS = [
   {
     question: 'Quels sont les modes de paiement acceptés ?',
     answer:
-      'Nous acceptons les paiements par carte bancaire, virement, chèque et espèces. Des facilités de paiement peuvent être proposées pour les montants importants.',
+      'Nous acceptons les paiements par virement bancaire, mobile money, chèque et espèces. Échéances typiques : 50 % à la commande, 30 % à mi-chantier, 20 % à la réception finale.',
   },
 ] as const;
 
@@ -520,9 +520,9 @@ function ContactPageContent() {
                     <div>
                       <p className="text-sm font-semibold text-white/90">Horaires</p>
                       <p className="mt-1 text-sm text-white/75">
-                        Lun – Ven : 8h – 19h
+                        {SITE.hours.weekdays}
                         <br />
-                        Sam : 9h – 17h
+                        {SITE.hours.saturday}
                       </p>
                     </div>
                   </li>

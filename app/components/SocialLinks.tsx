@@ -1,6 +1,6 @@
 'use client';
 
-import { FaFacebook, FaLinkedin, FaTiktok, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import { SITE } from '../lib/site';
 
 type Variant = 'light' | 'dark' | 'footer';
@@ -15,7 +15,6 @@ type SocialLinksProps = {
   variant?: Variant;
   size?: number;
   className?: string;
-  showYoutube?: boolean;
   showWhatsapp?: boolean;
 };
 
@@ -23,7 +22,6 @@ export default function SocialLinks({
   variant = 'light',
   size = 16,
   className = '',
-  showYoutube = true,
   showWhatsapp = false,
 }: SocialLinksProps) {
   const base =
@@ -37,9 +35,6 @@ export default function SocialLinks({
     { href: SITE.social.facebook, label: 'Facebook Smart Rénov', Icon: FaFacebook },
     { href: SITE.social.linkedin, label: 'LinkedIn Smart Rénov', Icon: FaLinkedin },
     { href: SITE.social.tiktok, label: 'TikTok Smart Rénov', Icon: FaTiktok },
-    ...(showYoutube
-      ? [{ href: SITE.social.youtube, label: 'YouTube Smart Rénov', Icon: FaYoutube }]
-      : []),
     ...(showWhatsapp
       ? [{ href: SITE.whatsapp, label: 'WhatsApp Smart Rénov', Icon: FaWhatsapp }]
       : []),

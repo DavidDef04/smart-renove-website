@@ -107,6 +107,33 @@ export default function FormationsPage() {
           ))}
         </motion.div>
 
+        <section className="mb-16 rounded-3xl border border-gray-100 bg-white p-8 md:p-10 shadow-sm">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">
+            Modalités de paiement
+          </h2>
+          <p className="text-center text-[var(--color-ink-muted)] mb-8 max-w-2xl mx-auto">
+            Échéances transparentes pour vos travaux et formations — le détail est confirmé sur devis.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            {[
+              { pct: '50 %', label: 'À la commande' },
+              { pct: '30 %', label: 'À mi-parcours' },
+              { pct: '20 %', label: 'À la réception' },
+            ].map((step) => (
+              <div
+                key={step.pct}
+                className="rounded-2xl bg-[var(--color-surface-soft)] px-6 py-5 text-center border border-gray-100"
+              >
+                <p className="text-3xl font-bold text-[var(--color-accent)]">{step.pct}</p>
+                <p className="mt-2 text-sm font-semibold text-gray-800">{step.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-sm text-[var(--color-ink-muted)]">
+            Paiement possible par virement bancaire, mobile money ou espèces.
+          </p>
+        </section>
+
         <section className="py-16 mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

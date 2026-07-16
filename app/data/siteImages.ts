@@ -233,7 +233,7 @@ export const SITE_IMAGES = {
       img('realisation-menuiserie-porte-verre.jpg'),
       img('realisation-menuiserie-fenetre-bronze.jpg'),
       img('realisation-menuiserie-facade-baies.jpg'),
-      img('realisation-menuiserie-puits-lumiere.jpg'),
+      img('rendu-3d-maison-moderne-pergola-balcon.jpg'),
       img('realisation-menuiserie-volets.jpg'),
     ],
     renovation: [

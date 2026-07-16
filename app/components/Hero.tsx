@@ -21,8 +21,11 @@ const slides = [
     highlight: 'transformée.',
     description:
       "Rénovation complète à Douala : un seul interlocuteur pour l'électricité, la plomberie, le carrelage, la peinture et la menuiserie.",
+    descriptionMobile:
+      "Rénovation complète à Douala — un seul interlocuteur pour tous vos travaux du second œuvre.",
     image: SITE_IMAGES.hero.slide1,
     imageAlt: 'Rénovation complète avant/après — salon transformé à Douala par Smart Rénov',
+    imageClass: 'object-cover object-center lg:object-contain lg:object-center',
     cta: '/renovation-complete',
   },
   {
@@ -34,6 +37,7 @@ const slides = [
       'Finitions soignées, réseaux conformes et délais tenus — pour particuliers et professionnels au Cameroun.',
     image: SITE_IMAGES.hero.slide2,
     imageAlt: 'Travaux de second œuvre et finitions intérieures à Douala',
+    imageClass: 'object-cover object-center lg:object-contain',
     cta: '/renovation-complete',
   },
   {
@@ -45,6 +49,7 @@ const slides = [
       "Fenêtres, baies coulissantes et façades aluminium : l'expertise Smart Rénov pour sublimer votre bien.",
     image: SITE_IMAGES.hero.slide3,
     imageAlt: 'Baies coulissantes et menuiserie aluminium sur mesure à Douala',
+    imageClass: 'object-cover object-center lg:object-contain',
     cta: '/services/menuiserie-aluminium',
   },
 ];
@@ -54,7 +59,7 @@ export default function Hero() {
   const slide = slides[active] ?? slides[0];
 
   return (
-    <section className="relative isolate min-h-[100svh] overflow-hidden">
+    <section className="relative isolate min-h-[88svh] overflow-hidden lg:min-h-[100svh]">
       <div className="absolute inset-0 z-0">
         <Swiper
           effect="fade"
@@ -67,22 +72,23 @@ export default function Hero() {
         >
           {slides.map((s) => (
             <SwiperSlide key={s.id}>
-              <div className="relative h-[100svh] w-full bg-[var(--color-night)]">
+              <div className="relative h-[88svh] w-full bg-[var(--color-night)] lg:h-[100svh]">
                 <Image
                   src={s.image}
                   alt={s.imageAlt}
                   fill
-                  className="object-contain object-center"
+                  className={s.imageClass ?? 'object-cover object-center lg:object-contain'}
                   priority={s.id === 0}
                   sizes="100vw"
                 />
-                {/* Dégradé surtout à gauche (texte) — la photo reste entièrement visible à droite */}
+                {/* Mobile : dégradé bas pour le texte, haut laissé transparent */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-r from-[#06080f]/95 via-[#06080f]/70 to-transparent lg:via-[#06080f]/35"
+                  className="absolute inset-0 bg-gradient-to-t from-[#06080f]/95 via-[#06080f]/55 to-transparent lg:from-[#06080f]/60 lg:via-transparent lg:to-transparent"
                   aria-hidden
                 />
+                {/* Desktop : dégradé à gauche — la photo reste entièrement visible à droite */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-[#06080f]/60 via-transparent to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-[#06080f]/95 via-[#06080f]/70 to-transparent lg:via-[#06080f]/35 max-lg:opacity-0"
                   aria-hidden
                 />
               </div>
@@ -91,31 +97,37 @@ export default function Hero() {
         </Swiper>
       </div>
 
-      <div className="relative z-20 flex min-h-[100svh] flex-col pointer-events-none">
-        <div className="flex flex-1 items-center px-4 pb-12 pt-[var(--site-header-h)] pointer-events-auto">
+      <div className="relative z-20 mt-[var(--site-header-h)] flex h-[calc(88svh-var(--site-header-h))] flex-col justify-center px-4 pb-10 pt-8 pointer-events-auto lg:h-[calc(100svh-var(--site-header-h))] lg:pb-12 lg:pt-0">
           <div className="container mx-auto w-full">
-            <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
               <motion.div
                 key={slide.id}
-                className="lg:col-span-7"
+                className="flex w-full max-w-2xl flex-col gap-6 py-6 sm:gap-7 sm:py-8 lg:col-span-7 lg:gap-6 lg:py-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="label-pill glass mb-5 inline-flex text-white/90 border-white/20">
+                <span className="label-pill glass inline-flex text-white/90 border-white/20">
                   <span className="h-2 w-2 bg-[var(--color-accent)] animate-pulse" />
                   {slide.tag} · Douala
                 </span>
 
-                <h1 className="font-display !text-white mb-5 max-w-2xl text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+                <h1 className="font-display !text-white max-w-2xl text-[clamp(1.75rem,6.5vw,3.75rem)] leading-[1.12] sm:leading-[1.08]">
                   {slide.title}
                   <br />
                   <span className="text-[var(--color-accent)]">{slide.highlight}</span>
                 </h1>
 
-                <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/80">{slide.description}</p>
+                <p className="max-w-xl text-sm leading-relaxed text-white/80 sm:text-base lg:text-lg">
+                  <span className="lg:hidden">
+                    {'descriptionMobile' in slide && slide.descriptionMobile
+                      ? slide.descriptionMobile
+                      : slide.description}
+                  </span>
+                  <span className="hidden lg:inline">{slide.description}</span>
+                </p>
 
-                <div className="mb-8 flex flex-col gap-3 sm:flex-row">
+                <div className="flex flex-col gap-4 pt-1 sm:flex-row sm:gap-4 sm:pt-0">
                   <Link href={SITE.routes.contact} className="sr-btn sr-btn--primary group">
                     Devis gratuit
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
@@ -127,13 +139,13 @@ export default function Hero() {
 
                 <a
                   href={`tel:${SITE.phone}`}
-                  className="inline-flex items-center gap-3 border border-white/20 bg-white/5 px-5 py-3 text-white transition-colors hover:bg-white/10"
+                  className="hidden sm:inline-flex items-center gap-3 border border-white/20 bg-white/5 px-5 py-3 text-white transition-colors hover:bg-white/10"
                   style={{ borderRadius: 'var(--sr-radius)' }}
                 >
-                  <span className="flex h-10 w-10 items-center justify-center bg-[var(--color-accent)]">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[var(--color-accent)]">
                     <Phone className="h-5 w-5" />
                   </span>
-                  <span>
+                  <span className="min-w-0">
                     <span className="block text-xs uppercase tracking-wider text-white/60">Appelez</span>
                     <span className="text-lg font-bold">{SITE.phoneDisplay}</span>
                   </span>
@@ -168,7 +180,6 @@ export default function Hero() {
               </motion.div>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

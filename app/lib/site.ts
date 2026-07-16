@@ -33,8 +33,8 @@ export const SITE_SEO = {
   googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   bingSiteVerification: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
   openingHours: [
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '19:00' },
-    { days: ['Saturday'], opens: '09:00', closes: '17:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:30' },
+    { days: ['Saturday'], opens: '08:00', closes: '13:30' },
   ],
 } as const;
 
@@ -54,15 +54,20 @@ export const SITE_MESSAGING = {
 } as const;
 
 export const SITE_SOCIAL = {
-  facebook: 'https://www.facebook.com/share/1DhYYbHJSc/?mibextid=wwXIfr',
+  facebook: 'https://www.facebook.com/share/1D3dEBrQo6/?mibextid=wwXIfr',
   linkedin:
     'https://www.linkedin.com/in/smart-renov-308b483b0?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   tiktok: 'https://www.tiktok.com/@smart_renov?_r=1&_t=ZN-96CBFiu6mso',
-  youtube: 'https://www.youtube.com/@smartrenov',
 } as const;
 
 export const SITE = {
   name: 'Smart Rénov',
+  legalName: 'Ets Smart Renove-Services',
+  legalForm: 'Établissement abrégé (Ets)',
+  foundedOn: '17 août 2023',
+  capital: '999 999 XAF',
+  rccm: 'R.C / DLA / 2020 / A15180',
+  taxId: 'P 079916051360 A',
   email: 'contact@smartrenov237.com',
   phone: '+237687185953',
   phoneDisplay: '+237 6 87 18 59 53',
@@ -74,6 +79,25 @@ export const SITE = {
     line1: 'Rond Point CC',
     line2: 'Douala, Cameroun',
     hint: "(Entre Ndogkoti et Le Commissariat 8ème)",
+  },
+  hours: {
+    weekdays: 'Lun – Ven : 8h – 17h30',
+    saturday: 'Sam : 8h – 13h30',
+    faq: 'Nos bureaux sont ouverts du lundi au vendredi de 8h à 17h30 et le samedi de 8h à 13h30. Notre équipe est également disponible en dehors de ces horaires sur rendez-vous.',
+  },
+  paymentSchedule:
+    '50 % à la commande, 30 % à mi-chantier, 20 % à la réception finale. Paiement possible par virement bancaire, mobile money ou espèces.',
+  siteAuthor: {
+    name: 'David René METOMO',
+    role: 'Développeur fullstack & pentester',
+    email: 'metomo442@gmail.com',
+    portfolio: 'https://portofio-metomo.vercel.app/',
+    linkedin:
+      'https://www.linkedin.com/in/david-ren%C3%A9-metomo-elogo-5b0432314/',
+    whatsappPrimary: 'https://wa.me/237656156546',
+    whatsappSecondary: 'https://wa.me/237679413963',
+    whatsappDisplay: '+237 6 56 15 65 46',
+    whatsappSecondaryDisplay: '+237 6 79 41 39 63',
   },
   routes: {
     home: '/',

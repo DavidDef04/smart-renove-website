@@ -162,6 +162,8 @@ export const SITEMAP_ROUTES: { path: string; changeFrequency: 'weekly' | 'monthl
   { path: '/services/facades-vitrees', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/services/portes-coulissantes', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/services/verrieres', changeFrequency: 'monthly', priority: 0.75 },
+  { path: '/services/isolation-sonore', changeFrequency: 'monthly', priority: 0.75 },
+  { path: '/services/percolat', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/services/agencements', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/services/securite', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/services/maintenance', changeFrequency: 'monthly', priority: 0.7 },
@@ -206,6 +208,18 @@ export const SERVICE_SEO = {
     description:
       'Verrières design pour apporter lumière et modernité à votre intérieur. Conception et pose à Douala — devis gratuit.',
     keywords: ['verrière aluminium', 'verrière Douala', 'lumière naturelle'],
+  },
+  'isolation-sonore': {
+    title: 'Isolation sonore menuiseries — Douala',
+    description:
+      'Isolation acoustique pour fenêtres, portes et cloisons à Douala. Réduisez les nuisances sonores avec Smart Rénov.',
+    keywords: ['isolation sonore', 'isolation acoustique Douala', 'vitrage anti-bruit'],
+  },
+  percolat: {
+    title: 'Percolat aluminium sur mesure — Douala',
+    description:
+      'Percolat et structures aluminium pour terrasses et balcons à Douala. Ombre, design et pose professionnelle — Smart Rénov.',
+    keywords: ['percolat', 'pergola aluminium Douala', 'terrasse couverte'],
   },
   'agencements': {
     title: 'Agencements intérieurs aluminium — Douala',
@@ -272,7 +286,13 @@ export function localBusinessJsonLd(): Record<string, unknown> {
     '@type': 'HomeAndConstructionBusiness',
     '@id': `${SITE_SEO.url}/#organization`,
     name: SITE.name,
-    alternateName: ['Smart Renov 237', 'Smart Rénov Cameroun', 'smartrenov237.com'],
+    alternateName: [
+      'Ets Smart Renove-Services',
+      'Smart Renov 237',
+      'Smart Rénov Cameroun',
+      'smartrenov237.com',
+    ],
+    legalName: SITE.legalName,
     url: SITE_SEO.url,
     logo: `${SITE_SEO.url}/icon`,
     image: `${SITE_SEO.url}${DEFAULT_OG_IMAGE}`,

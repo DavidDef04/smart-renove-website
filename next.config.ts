@@ -15,7 +15,9 @@ const nextConfig: NextConfig = {
       { source: '/pages/about', destination: '/about', permanent: true },
       { source: '/pages/contact', destination: '/contact', permanent: true },
       { source: '/services/renovation', destination: '/renovation-complete', permanent: true },
-      { source: '/services/isolation-thermique', destination: '/services', permanent: true },
+      { source: '/services/isolation-thermique', destination: '/services/isolation-sonore', permanent: true },
+      { source: '/services/puits-de-lumiere', destination: '/services/percolat', permanent: true },
+      { source: '/services/puits-lumiere', destination: '/services/percolat', permanent: true },
     ];
   },
   async headers() {

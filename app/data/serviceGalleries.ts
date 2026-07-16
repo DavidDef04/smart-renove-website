@@ -119,9 +119,9 @@ export const SERVICE_GALLERIES: Record<string, ServiceGalleryItem[]> = {
   ],
   verrieres: [
     {
-      image: SITE_IMAGES.gallery.menuiserie[4],
-      title: 'Puits de lumière',
-      description: 'Lanterneau vitré pour apporter la lumière naturelle.',
+      image: img('rendu-3d-maison-moderne-pergola-balcon.jpg'),
+      title: 'Percolat',
+      description: 'Structure aluminium pour terrasse et balcon — ombre et confort extérieur.',
     },
     {
       image: img('cloison-vitree-bureau-cadre-blanc-desk.jpg'),
@@ -247,26 +247,48 @@ export const SERVICE_GALLERIES: Record<string, ServiceGalleryItem[]> = {
       description: 'Équipe Smart Rénov en intervention maintenance et SAV.',
     },
   ],
-  'isolation-thermique': [
+  'isolation-sonore': [
     {
       image: img('fenetre-coulissante-alu-anthracite-moustiquaire.jpg'),
-      title: 'Fenêtre à rupture de pont thermique',
-      description: 'Menuiserie anthracite avec moustiquaire intégrée.',
+      title: 'Fenêtre à isolation acoustique',
+      description: 'Menuiserie aluminium et vitrage adaptés pour réduire les bruits extérieurs.',
     },
     {
       image: img('fenetre-coulissante-alu-blanc-vitrage-bleu.jpg'),
-      title: 'Vitrage performant',
-      description: 'Fenêtre coulissante à vitrage isolant pour réduire les déperditions.',
+      title: 'Vitrage acoustique',
+      description: 'Double vitrage et joints étanches pour un confort sonore renforcé.',
     },
     {
-      image: img('volet-persienne-aluminium-effet-bois-marron.jpg'),
-      title: 'Persienne aluminium',
-      description: 'Protection solaire et isolation complémentaire des ouvertures.',
+      image: img('cloison-vitree-cadre-noir-bureau-chantier.jpg'),
+      title: 'Cloison vitrée isolante',
+      description: 'Séparation intérieure qui limite la transmission du bruit entre espaces.',
     },
     {
-      image: SITE_IMAGES.gallery.menuiserie[5],
-      title: 'Volets isolants',
-      description: 'Volets aluminium pour améliorer le confort thermique.',
+      image: img('amenagement-bureau-cloisons-aluminium-stores-gris.jpg'),
+      title: 'Agencement acoustique',
+      description: 'Cloisons aluminium et verre pour bureaux plus calmes.',
+    },
+  ],
+  percolat: [
+    {
+      image: img('rendu-3d-maison-moderne-pergola-balcon.jpg'),
+      title: 'Percolat terrasse',
+      description: 'Structure aluminium pour ombrager terrasse et balcon.',
+    },
+    {
+      image: img('amenagement-patio-baie-vitree-gazon-synthetique.jpg'),
+      title: 'Patio couvert',
+      description: 'Espace extérieur protégé, relié à la maison par baie vitrée.',
+    },
+    {
+      image: img('toiture-aluminium.jpg'),
+      title: 'Couverture aluminium',
+      description: 'Toiture légère et durable pour percolat et extensions.',
+    },
+    {
+      image: SITE_IMAGES.gallery.menuiserie[3],
+      title: 'Ouverture vers l\'extérieur',
+      description: 'Baies et structures aluminium pour prolonger le séjour dehors.',
     },
   ],
 };

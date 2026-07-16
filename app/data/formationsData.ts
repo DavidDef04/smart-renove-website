@@ -14,7 +14,7 @@ export const FORMATIONS: FormationItem[] = [
     title: 'Pose de menuiserie aluminium',
     description:
       'Formation pratique à la pose de fenêtres, portes et baies aluminium. Vous serez opérationnel sur les chantiers résidentiels et commerciaux.',
-    duration: '10 Mois',
+    duration: '24 Mois',
     imageUrl: SITE_IMAGES.formations.menuiserie,
   },
   {
@@ -22,7 +22,7 @@ export const FORMATIONS: FormationItem[] = [
     title: 'Carrelage & revêtements de sol',
     description:
       'Formation à la pose de carrelage et revêtements de sol. Vous maîtriserez salles de bain, cuisines et finitions intérieures.',
-    duration: '8 Mois',
+    duration: '6 Mois',
     imageUrl: SITE_IMAGES.formations.carrelage,
   },
   {
@@ -38,7 +38,7 @@ export const FORMATIONS: FormationItem[] = [
     title: 'Peinture & finitions intérieures',
     description:
       'Formation peinture et finitions : préparation des supports et application adaptée au climat tropical pour un rendu durable.',
-    duration: '10 Mois',
+    duration: '6 Mois',
     imageUrl: SITE_IMAGES.formations.peinture,
   },
 ];

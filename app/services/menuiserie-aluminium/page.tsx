@@ -20,8 +20,8 @@ const MenuiserieAluminiumPage = () => {
       heroDescription="Des solutions sur mesure pour une isolation optimale et un design contemporain"
       features={[
         {
-          title: "Isolation Thermique",
-          description: "Nos menuiseries aluminium sont conçues pour une isolation thermique optimale, réduisant les déperditions d'énergie jusqu'à 40%.",
+          title: "Isolation sonore",
+          description: "Nos menuiseries aluminium sont conçues pour une isolation acoustique optimale, limitant les nuisances sonores extérieures.",
           icon: <Wrench className="h-6 w-6 text-white" />
         },
         {

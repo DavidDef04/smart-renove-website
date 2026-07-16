@@ -10,6 +10,8 @@ const SERVICE_HREFS: Record<string, string> = {
   'projets-commerciaux': '/services/facades-vitrees',
   'fourniture-pose': '/services/menuiserie-aluminium',
   serrurerie: '/services/portes-entree',
+  'isolation-sonore': '/services/isolation-sonore',
+  percolat: '/services/percolat',
 };
 
 export function getServiceHref(slug: string, title?: string): string {

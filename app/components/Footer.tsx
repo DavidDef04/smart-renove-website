@@ -24,7 +24,7 @@ const Footer = () => {
             <p className="text-blue-100">
               {SITE_MESSAGING.footerAbout}
             </p>
-            <SocialLinks variant="footer" size={18} className="pt-2" showYoutube />
+            <SocialLinks variant="footer" size={18} className="pt-2" />
           </div>
 
           {/* Quick Links */}
@@ -159,7 +159,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-blue-200 text-sm text-center md:text-left mb-4 md:mb-0">
-            © {currentYear} Smart Renov. Tous droits réservés.
+            © {currentYear} {SITE.legalName}. Tous droits réservés.
           </p>
           <div className="flex space-x-6">
             <a href={SITE.routes.privacy} className="group relative text-blue-200 hover:text-white text-sm transition-all duration-300 px-1">
