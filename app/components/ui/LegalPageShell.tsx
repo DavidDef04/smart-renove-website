@@ -131,13 +131,13 @@ export function LegalSection({ title, children, dark = false }: LegalSectionProp
   );
 }
 
-type LegalInfoRow = {
+type LegalInfoRowProps = {
   icon: ReactNode;
   label: string;
   value: ReactNode;
 };
 
-export function LegalInfoRow({ icon, label, value }: LegalInfoProps) {
+export function LegalInfoRow({ icon, label, value }: LegalInfoRowProps) {
   return (
     <div className="flex items-start gap-3">
       <span className="mt-0.5 shrink-0 text-[var(--color-accent)]">{icon}</span>
