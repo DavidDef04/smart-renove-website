@@ -22,7 +22,7 @@ const slides = [
     description:
       "Rénovation complète à Douala : un seul interlocuteur pour l'électricité, la plomberie, le carrelage, la peinture et la menuiserie.",
     descriptionMobile:
-      "Rénovation complète à Douala — un seul interlocuteur pour tous vos travaux du second œuvre.",
+      "Rénovation complète à Douala — un interlocuteur unique pour vos travaux.",
     image: SITE_IMAGES.hero.slide1,
     imageAlt: 'Rénovation complète avant/après — salon transformé à Douala par Smart Rénov',
     imageClass: 'object-cover object-center lg:object-contain lg:object-center',
@@ -97,28 +97,27 @@ export default function Hero() {
         </Swiper>
       </div>
 
-      <div className="relative z-20 mt-[var(--site-header-h)] flex h-[calc(88svh-var(--site-header-h))] flex-col justify-center px-4 pb-10 pt-8 pointer-events-auto lg:h-[calc(100svh-var(--site-header-h))] lg:pb-12 lg:pt-0">
-          <div className="container mx-auto w-full">
+      <div className="relative z-20 mt-[var(--site-header-h)] flex min-h-[calc(88svh-var(--site-header-h))] flex-col justify-center overflow-x-hidden px-4 pb-10 pt-6 pointer-events-auto sm:pt-8 lg:min-h-[calc(100svh-var(--site-header-h))] lg:h-[calc(100svh-var(--site-header-h))] lg:pb-12 lg:pt-0">
+          <div className="container mx-auto w-full min-w-0">
             <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
               <motion.div
                 key={slide.id}
-                className="flex w-full max-w-2xl flex-col gap-6 py-6 sm:gap-7 sm:py-8 lg:col-span-7 lg:gap-6 lg:py-0"
+                className="flex w-full min-w-0 max-w-2xl flex-col gap-4 py-2 sm:gap-6 sm:py-6 lg:col-span-7 lg:gap-6 lg:py-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="label-pill glass inline-flex text-white/90 border-white/20">
-                  <span className="h-2 w-2 bg-[var(--color-accent)] animate-pulse" />
+                <span className="label-pill glass inline-flex max-w-full text-white/90 border-white/20">
+                  <span className="h-2 w-2 shrink-0 bg-[var(--color-accent)] animate-pulse" />
                   {slide.tag} · Douala
                 </span>
 
-                <h1 className="font-display !text-white max-w-2xl text-[clamp(1.75rem,6.5vw,3.75rem)] leading-[1.12] sm:leading-[1.08]">
-                  {slide.title}
-                  <br />
-                  <span className="text-[var(--color-accent)]">{slide.highlight}</span>
+                <h1 className="font-display !m-0 w-full max-w-full break-words !text-[clamp(1.45rem,6.2vw,3.75rem)] font-extrabold !leading-[1.15] tracking-[-0.02em] !text-white sm:!leading-[1.08]">
+                  <span className="block">{slide.title}</span>
+                  <span className="block text-[var(--color-accent)]">{slide.highlight}</span>
                 </h1>
 
-                <p className="max-w-xl text-sm leading-relaxed text-white/80 sm:text-base lg:text-lg">
+                <p className="w-full max-w-xl break-words text-sm leading-relaxed text-white/80 sm:text-base lg:text-lg">
                   <span className="lg:hidden">
                     {'descriptionMobile' in slide && slide.descriptionMobile
                       ? slide.descriptionMobile
@@ -127,12 +126,12 @@ export default function Hero() {
                   <span className="hidden lg:inline">{slide.description}</span>
                 </p>
 
-                <div className="flex flex-col gap-4 pt-1 sm:flex-row sm:gap-4 sm:pt-0">
-                  <Link href={SITE.routes.contact} className="sr-btn sr-btn--primary group">
+                <div className="flex w-full min-w-0 flex-col gap-3 pt-1 sm:flex-row sm:gap-4 sm:pt-0">
+                  <Link href={SITE.routes.contact} className="sr-btn sr-btn--primary group max-sm:w-full">
                     Devis gratuit
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
-                  <Link href={slide.cta} className="sr-btn sr-btn--ghost-light">
+                  <Link href={slide.cta} className="sr-btn sr-btn--ghost-light max-sm:w-full">
                     Découvrir l&apos;offre
                   </Link>
                 </div>
